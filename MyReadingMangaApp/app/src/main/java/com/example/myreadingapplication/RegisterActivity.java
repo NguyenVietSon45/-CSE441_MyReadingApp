@@ -10,6 +10,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -30,6 +33,11 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://demo2024-30b77-default-rtdb.firebaseio.com/");
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
     }
 
 
