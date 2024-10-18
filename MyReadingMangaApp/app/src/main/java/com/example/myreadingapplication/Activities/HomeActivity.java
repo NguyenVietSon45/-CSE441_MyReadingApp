@@ -19,7 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.myreadingapplication.Activities.HomeFragment;
 import com.example.myreadingapplication.Activities.ArchieveFragment;
 import com.example.myreadingapplication.Activities.NoticeFragment;
-
+import com.google.android.material.navigation.NavigationBarView;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -33,6 +33,24 @@ public class HomeActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+//DÒNG DƯỚI NÀY NÈ, NÃYC HỊ XOÁ NHẦM :V
+        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
+        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.action_home) {
+                    Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                } else if (itemId == R.id.action_archive) {
+                    Toast.makeText(HomeActivity.this, "Archive", Toast.LENGTH_SHORT).show();
+                } else if (itemId == R.id.action_notice) {
+                    Toast.makeText(HomeActivity.this, "Notice", Toast.LENGTH_SHORT).show();
+                }
+
+                return true;
+            }
         });
 
 

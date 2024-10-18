@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu_bottom_navigation"
-        app:itemBackground="#D9D9D9"
-        app:itemIconTint="@color/black"/>
+        app:itemBackground="@drawable/bg_bottom_nav_item"
+    app:itemIconTint="@color/black"/>
+
 
 
 </RelativeLayout>
