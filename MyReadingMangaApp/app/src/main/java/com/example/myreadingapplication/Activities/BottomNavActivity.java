@@ -37,10 +37,10 @@ public class BottomNavActivity extends AppCompatActivity {
                         Toast.makeText(BottomNavActivity.this,"Home", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_archive:
-                        Toast.makeText(BottomNavActivity.this,"Home", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BottomNavActivity.this,"Archive", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_notice:
-                        Toast.makeText(BottomNavActivity.this,"Home", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BottomNavActivity.this,"Notice", Toast.LENGTH_SHORT).show();
                         break;
 
                 }
