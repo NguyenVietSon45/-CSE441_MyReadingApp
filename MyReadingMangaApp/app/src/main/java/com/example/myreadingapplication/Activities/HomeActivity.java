@@ -1,7 +1,10 @@
 package com.example.myreadingapplication.Activities;
 
+import static android.app.ProgressDialog.show;
+
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;

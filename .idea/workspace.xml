@@ -16,45 +16,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4966a244-ae8a-49b6-ab0e-a8619e59c31e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/proguard-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/androidTest/java/com/example/myreadingapplication/ExampleInstrumentedTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/java/com/example/myreadingapplication/MainActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/drawable/ic_launcher_foreground.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/xml/backup_rules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/main/res/xml/data_extraction_rules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/app/src/test/java/com/example/myreadingapplication/ExampleUnitTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/gradle/libs.versions.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyReadingMangaApp/settings.gradle.kts" afterDir="false" />
-    </list>
+    <list default="true" id="4966a244-ae8a-49b6-ab0e-a8619e59c31e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,17 +42,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;quynhanh&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "quynhanh",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/hoc_hanh/android/MyReadingApp/MyReadingMangaApp",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="MyReadingMangaApp.app.main" />
