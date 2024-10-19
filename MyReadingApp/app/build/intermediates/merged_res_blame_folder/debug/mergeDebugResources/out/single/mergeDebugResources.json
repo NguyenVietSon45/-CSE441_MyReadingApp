@@ -1,0 +1,142 @@
+[
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_home.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\home.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_baseline_add_circle_24.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\baseline_add_circle_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_archive.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\archive.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_baseline_more_horiz_24.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\baseline_more_horiz_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_baseline_sort_24.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\baseline_sort_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_baseline_arrow_back_24.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\baseline_arrow_back_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_tool.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\tool.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_mra.png.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\mra.png"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_baseline_account_circle_24.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\baseline_account_circle_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_notice.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\notice.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.myreadingapp-debug-37:/layout_activity_login.xml.flat",
+        "source": "com.example.myreadingapp-main-39:/layout/activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_settings.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_yatoblink.jpg.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\yatoblink.jpg"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_poster.jpg.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\poster.jpg"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_upload.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\upload.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_bg_bottom_nav_item.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\bg_bottom_nav_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\drawable_log_out.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\drawable\\log_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-debug-37:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\ADMIN\\.gradle\\daemon\\8.9\\com.example.myreadingapp-main-39:\\xml\\data_extraction_rules.xml"
+    }
+]
