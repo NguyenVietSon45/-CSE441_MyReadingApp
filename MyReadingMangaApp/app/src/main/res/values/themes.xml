@@ -6,4 +6,20 @@
     </style>
 
     <style name="Theme.MyReadingApplication" parent="Base.Theme.MyReadingApplication" />
+
+
+    <!-- Light mode -->
+    <!--Screen background if light mode on -->
+    <style name="Screen">
+        <item name="android:background">#FFF</item>
+    </style>
+    <!-- Texts background if light mode on -->
+    <style name="TEXT">
+        <item name="android:textColor">#000</item>
+    </style>
+    <!-- Button background if light mode on -->
+    <style name="BUTTON">
+        <item name="android:background">@color/light_grey</item>
+    </style>
+
 </resources>
