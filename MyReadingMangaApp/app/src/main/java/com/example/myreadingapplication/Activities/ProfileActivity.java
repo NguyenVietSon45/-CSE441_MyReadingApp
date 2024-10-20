@@ -65,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         nightMODE = sharedPreferences.getBoolean("night", false); //light MODE is default
 
-        if (nightMODE){
+        if (nightMODE) {
             switcher.setChecked(true);
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
@@ -74,7 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
         switcher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nightMODE){
+                if (nightMODE) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     editor = sharedPreferences.edit();
                     editor.putBoolean("night", false);
@@ -87,26 +87,5 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
-        replaceFragment(new HomeFragment());
-
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.action_home) {
-                replaceFragment(new HomeFragment());
-            } else if (item.getItemId() == R.id.action_archive) {
-                replaceFragment(new ArchieveFragment());
-            } else if (item.getItemId() == R.id.action_notice) {
-                replaceFragment(new NoticeFragment());
-            }
-            return true;
-        });
-
-    }
-    
-    private void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
-        fragmentTransaction.commit();
     }
 }
