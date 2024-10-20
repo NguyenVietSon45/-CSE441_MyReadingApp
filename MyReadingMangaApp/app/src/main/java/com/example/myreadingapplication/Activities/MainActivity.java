@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://mangaapp-526e1-default-rtdb.firebaseio.com/");
+        DatabaseReference myRef = database.getReference("message");
+        myRef.setValue("Hello");
 
     }
     private void replaceFragment(Fragment fragment){
