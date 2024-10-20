@@ -7,16 +7,18 @@
 
     <!-- Dark mode -->
     <!--Screen background if dark mode on -->
-    <style name="Screen">
-        <item name="android:background">#FFF</item>
+    <style name="SCREEN">
+        <item name="android:background">@color/dark_grey</item>
     </style>
     <!-- Texts background if dark mode on -->
     <style name="TEXT">
-        <item name="android:textColor">#000</item>
+        <item name="android:textColor">#FFF</item>
     </style>
     <!-- Button background if dark mode on -->
     <style name="BUTTON">
         <item name="android:background">@color/light_grey</item>
+        <item name="android:textColor">#000</item>
+
     </style>
 
 </resources>

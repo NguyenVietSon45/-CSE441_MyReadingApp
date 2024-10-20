@@ -1,28 +1,45 @@
 package com.example.myreadingapplication.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myreadingapplication.R;
+import com.example.myreadingapplication.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    Switch switcher;
+    boolean nightMODE;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.profile), (v, insets) -> {
@@ -40,22 +57,56 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }));
 
-        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
-        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        //dark-light MODE
+//      getSupportActionBar().hide(); //no need bcs parent="Theme.AppCompat.NoActionBar"
+        switcher = findViewById(R.id.switch_MODE);
+
+        //used sharedPreferences to save MODE  if exit the app and go back again
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        nightMODE = sharedPreferences.getBoolean("night", false); //light MODE is default
+
+        if (nightMODE){
+            switcher.setChecked(true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+        }
+
+        switcher.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-
-                if (itemId == R.id.action_home) {
-                    Toast.makeText(ProfileActivity.this, "Home", Toast.LENGTH_SHORT).show();
-                } else if (itemId == R.id.action_archive) {
-                    Toast.makeText(ProfileActivity.this, "Archive", Toast.LENGTH_SHORT).show();
-                } else if (itemId == R.id.action_notice) {
-                    Toast.makeText(ProfileActivity.this, "Notice", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                if (nightMODE){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    editor = sharedPreferences.edit();
+                    editor.putBoolean("night", false);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    editor = sharedPreferences.edit();
+                    editor.putBoolean("night", true);
                 }
-
-                return true;
+                editor.apply();
             }
         });
+
+
+        replaceFragment(new HomeFragment());
+
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.action_home) {
+                replaceFragment(new HomeFragment());
+            } else if (item.getItemId() == R.id.action_archive) {
+                replaceFragment(new ArchieveFragment());
+            } else if (item.getItemId() == R.id.action_notice) {
+                replaceFragment(new NoticeFragment());
+            }
+            return true;
+        });
+
+    }
+    
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit();
     }
 }
