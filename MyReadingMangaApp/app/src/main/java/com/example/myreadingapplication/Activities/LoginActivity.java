@@ -22,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText loginName, loginPass;
@@ -65,14 +67,19 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        btnLogin.setOnClickListener((new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!validateUsername() | !validatePassword()){
+                    //if validateUsername()or validatePassword() false, nothing work
+                } else {
+                    checkUser();
+                }
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        }));
+        });
 
     }
 
@@ -117,8 +124,18 @@ public class LoginActivity extends AppCompatActivity {
                     String passwordFromDB = snapshot.child(username).child("password").getValue(String.class);
 
                     //compare password stored in dtb with password provided by user
-                    
-
+                    if (!Objects.equals(passwordFromDB, password)){
+                        loginName.setError(null);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else{  //if password doesn't match
+                        loginPass.setError("Invalid Credentials");
+                        loginPass.requestFocus();
+                    }
+                } else {
+                    loginName.setError("User does not exist");
+                    loginName.requestFocus();
                 }
             }
 
