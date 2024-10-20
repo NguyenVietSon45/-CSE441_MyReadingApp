@@ -35,10 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://demo2024-30b77-default-rtdb.firebaseio.com/");
-        DatabaseReference myRef = database.getReference("message");
 
-        myRef.setValue("Hello");
     }
 
 

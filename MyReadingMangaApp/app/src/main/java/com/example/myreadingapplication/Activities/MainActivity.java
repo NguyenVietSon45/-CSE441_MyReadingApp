@@ -21,6 +21,8 @@ import com.example.myreadingapplication.R;
 import com.example.myreadingapplication.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://demo2024-30b77-default-rtdb.firebaseio.com/");
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello");
 
     }
     private void replaceFragment(Fragment fragment){
