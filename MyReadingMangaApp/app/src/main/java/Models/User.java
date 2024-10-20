@@ -1,16 +1,17 @@
 package Models;
 
 public class User {
-    public String username, email, pass, avatar;
-
-    public User(String username, String avatar, String email, String pass) {
-        this.username = username;
-        this.avatar = avatar;
-        this.email = email;
-        this.pass = pass;
-    }
+    String username;
+    String email;
+    String password;
 
     public User() {
+    }
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -29,19 +30,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

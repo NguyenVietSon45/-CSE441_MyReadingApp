@@ -3,19 +3,30 @@ package com.example.myreadingapplication.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myreadingapplication.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
+
+    EditText loginName, loginPass;
+    TextView txtForgotPassword;
+    Button btnSignUp, btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +39,13 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        TextView txtForgotPassword = findViewById(R.id.txt_forgot_password);
+        loginName = findViewById(R.id.edt_loginName);
+        loginPass = findViewById(R.id.edt_loginPass);
+        btnLogin = findViewById(R.id.btn_login);
+        btnSignUp = findViewById(R.id.btn_sign_up);
+        txtForgotPassword = findViewById(R.id.txt_forgot_password);
+
+
         txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView btnSignUp = findViewById(R.id.btn_sign_up);
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView btnLogin = findViewById(R.id.btn_login);
+
         btnLogin.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,5 +74,58 @@ public class LoginActivity extends AppCompatActivity {
             }
         }));
 
+    }
+
+    //kiem tra username empty
+    public boolean validateUsername(){
+        String val = loginName.getText().toString();
+        if (val.isEmpty()){
+            loginName.setError("Username cannot be empty.");
+            return false;
+        } else {
+            loginName.setError(null);
+            return true;
+        }
+    }
+
+    //kiem tra password empty
+    public boolean validatePassword(){
+        String val = loginPass.getText().toString();
+        if (val.isEmpty()){
+            loginPass.setError("Password cannot be empty.");
+            return false;
+        } else {
+            loginPass.setError(null);
+            return true;
+        }
+    }
+
+    //check user in database or not
+    public void checkUser(){
+        String username = loginName.getText().toString().trim();
+        String password = loginPass.getText().toString().trim();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        //compare username stored in dtb with username provided by user
+        Query checkUserDatabase = reference.orderByChild("username").equalTo(username);
+
+        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    loginName.setError(null);
+                    String passwordFromDB = snapshot.child(username).child("password").getValue(String.class);
+
+                    //compare password stored in dtb with password provided by user
+                    
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

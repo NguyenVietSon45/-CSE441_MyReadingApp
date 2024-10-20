@@ -39,7 +39,7 @@
             app:cardCornerRadius="15dp">
 
             <EditText
-                android:id="@+id/editTextText"
+                android:id="@+id/edt_loginName"
                 android:layout_width="323dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -51,7 +51,7 @@
                 android:textColor="@color/white"/>
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/edt_loginPass"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
