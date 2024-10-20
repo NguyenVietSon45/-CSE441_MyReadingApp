@@ -60,12 +60,12 @@ public class RegisterActivity extends AppCompatActivity {
                 database = FirebaseDatabase.getInstance();
                 reference = database.getReference("users");
 
-                String name = registerName.getText().toString().trim();
+                String username = registerName.getText().toString().trim();
                 String mail = registerMail.getText().toString().trim();
                 String pass = registerPass.getText().toString().trim();
 
-                User user = new User(name, mail, pass);
-                reference.child(name).setValue(user);
+                User user = new User(username, mail, pass);
+                reference.child(username).setValue(user);
 
                 Toast.makeText(RegisterActivity.this, "You have sign up successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);

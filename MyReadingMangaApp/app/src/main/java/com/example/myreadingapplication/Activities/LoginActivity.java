@@ -75,9 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     checkUser();
                 }
-
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -124,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                     String passwordFromDB = snapshot.child(username).child("password").getValue(String.class);
 
                     //compare password stored in dtb with password provided by user
-                    if (!Objects.equals(passwordFromDB, password)){
+                    if (passwordFromDB.equals(password)){
                         loginName.setError(null);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
