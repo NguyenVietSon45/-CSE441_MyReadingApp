@@ -3,13 +3,19 @@
     android:layout_width="120dp"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_manga_poster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp">
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp">
         <ImageView
+            android:id="@+id/img_manga_poster"
             android:layout_width="120dp"
             android:layout_height="150dp"
             android:src="@drawable/poster"
@@ -17,6 +23,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/tv_manga_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Moriaty: The Patriorty"
@@ -26,6 +33,7 @@
         android:maxLines="1"
         android:textColor="#424242"/>
     <TextView
+        android:id="@+id/tv_manga_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12dp"

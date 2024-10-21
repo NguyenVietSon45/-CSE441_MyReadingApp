@@ -3,12 +3,23 @@ package com.example.myreadingapplication.Activities;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myreadingapplication.Adapter.CategoryAdapter;
 import com.example.myreadingapplication.R;
+
+import org.checkerframework.checker.units.qual.C;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Models.Category;
+import Models.Manga;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +27,9 @@ import com.example.myreadingapplication.R;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+
+    private RecyclerView rcvCategory;
+    private CategoryAdapter categoryAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,12 +69,46 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+//        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        rcvCategory = view.findViewById(R.id.rcv_category);
+        categoryAdapter = new CategoryAdapter(requireContext());
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false);
+        rcvCategory.setLayoutManager(linearLayoutManager);
+
+        categoryAdapter.setData(getListCategory());
+        rcvCategory.setAdapter(categoryAdapter);
+        return view;
+    }
+
+    private List<Category> getListCategory(){
+        List<Category> listCategory = new ArrayList<>();
+
+        List<Manga> listManga = new ArrayList<>();
+        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author1"));
+        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author2"));
+        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author3"));
+        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author4"));
+
+        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author1"));
+        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author2"));
+        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author3"));
+        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author4"));
+
+        listCategory.add(new Category("Favorite", listManga));
+        listCategory.add(new Category("Trending", listManga));
+        listCategory.add(new Category("Favorite", listManga));
+        listCategory.add(new Category("Trending", listManga));
+
+        return listCategory;
     }
 }
