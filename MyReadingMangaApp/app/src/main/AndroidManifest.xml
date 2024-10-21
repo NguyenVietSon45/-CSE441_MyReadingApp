@@ -14,34 +14,32 @@
         android:theme="@style/Theme.MyReadingApplication"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.AvatarUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SettingProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Activities.ProfileActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".Activities.LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".Activities.RegisterActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".Activities.ForgotPasswordActivity"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true" />
     </application>
 
 </manifest>
