@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myreadingapplication.R;
 import com.example.myreadingapplication.databinding.ActivityMainBinding;
+import com.example.myreadingapplication.databinding.ActivityProfileBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -32,16 +33,18 @@ public class ProfileActivity extends AppCompatActivity {
     boolean nightMODE;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    ActivityMainBinding binding;
+    ActivityProfileBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        // Sử dụng binding để thiết lập nội dung view
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_profile);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.profile), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -69,6 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
             switcher.setChecked(true);
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
+
         }
 
         switcher.setOnClickListener(new View.OnClickListener() {
@@ -87,5 +91,26 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+//        if (savedInstanceState == null) {
+//            replaceFragment(new HomeFragment()); // Chỉ thay thế khi activity được khởi tạo lần đầu
+//        }
+
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.action_home) {
+                replaceFragment(new HomeFragment());
+            } else if (item.getItemId() == R.id.action_archive) {
+                replaceFragment(new ArchieveFragment());
+            } else if (item.getItemId() == R.id.action_notice) {
+                replaceFragment(new NoticeFragment());
+            }
+            return true;
+        });
+    }
+
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout_profile, fragment);
+        fragmentTransaction.commit();
     }
 }

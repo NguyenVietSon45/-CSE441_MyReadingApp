@@ -51,7 +51,7 @@
             android:layout_marginTop="40dp">
 
             <FrameLayout
-                android:id="@+id/frameLayout"
+                android:id="@+id/frameLayout_setting_profile"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"

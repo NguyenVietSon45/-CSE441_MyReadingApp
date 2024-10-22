@@ -13,12 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyReadingApplication"
         tools:targetApi="31">
-        <activity
-            android:name=".Activities.AvatarUpdateActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.SettingProfileActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">
@@ -40,6 +35,12 @@
         <activity
             android:name=".Activities.ForgotPasswordActivity"
             android:exported="true" />
+        <activity
+            android:name=".Activities.AvatarUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SettingProfileActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

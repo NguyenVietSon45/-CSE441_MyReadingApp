@@ -121,10 +121,13 @@ public class LoginActivity extends AppCompatActivity {
                     String passwordFromDB = snapshot.child(username).child("password").getValue(String.class);
 
                     //compare password stored in dtb with password provided by user
-                    if (passwordFromDB.equals(password)){
+                    if (passwordFromDB.equals(password)) {
                         loginName.setError(null);
+                        // Mở MainActivity và điều hướng đến HomeFragment
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("FRAGMENT", "HOME"); // Thêm extra để xác định Fragment nào sẽ mở
                         startActivity(intent);
+                        finish(); // Kết thúc LoginActivity
                     }
                     else{  //if password doesn't match
                         loginPass.setError("Invalid Credentials");

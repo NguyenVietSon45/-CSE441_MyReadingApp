@@ -18,7 +18,7 @@
         android:layout_marginStart="20dp"/>
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/frameLayout_register"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,14 +1,18 @@
 package com.example.myreadingapplication.Activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.myreadingapplication.Adapter.CategoryAdapter;
 import com.example.myreadingapplication.R;
@@ -30,6 +34,7 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView rcvCategory;
     private CategoryAdapter categoryAdapter;
+    private ImageView imgProfile;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,6 +84,7 @@ public class HomeFragment extends Fragment {
 //        return inflater.inflate(R.layout.fragment_home, container, false);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // Ánh xạ RecyclerView và adapter
         rcvCategory = view.findViewById(R.id.rcv_category);
         categoryAdapter = new CategoryAdapter(requireContext());
 
@@ -87,6 +93,20 @@ public class HomeFragment extends Fragment {
 
         categoryAdapter.setData(getListCategory());
         rcvCategory.setAdapter(categoryAdapter);
+
+
+        imgProfile = view.findViewById(R.id.profile_image);
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Xóa tất cả Activity phía trên
+                startActivity(intent);
+                requireActivity().finish(); // Đóng MainActivity
+            }
+        });
+
+
         return view;
     }
 
