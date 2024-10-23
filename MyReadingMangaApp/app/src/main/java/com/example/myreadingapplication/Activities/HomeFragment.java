@@ -100,9 +100,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Xóa tất cả Activity phía trên
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Xóa tất cả Activity phía trên
                 startActivity(intent);
-                requireActivity().finish(); // Đóng MainActivity
+                getActivity().finish();
+                // Đóng MainActivity
             }
         });
 
