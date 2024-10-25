@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class ProfileActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     ActivityProfileBinding binding;
 
+    Button btnLogout, btnSetting
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,16 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
 
-        TextView btnLogout = findViewById(R.id.btn_logout);
+        btnLogout = findViewById(R.id.btn_logout);
+        btnLogout.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        }));
+
+        btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,16 +107,16 @@ public class ProfileActivity extends AppCompatActivity {
 //            replaceFragment(new HomeFragment()); // Chỉ thay thế khi activity được khởi tạo lần đầu
 //        }
 
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.action_home) {
-                replaceFragment(new HomeFragment());
-            } else if (item.getItemId() == R.id.action_archive) {
-                replaceFragment(new ArchieveFragment());
-            } else if (item.getItemId() == R.id.action_notice) {
-                replaceFragment(new NoticeFragment());
-            }
-            return true;
-        });
+//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+//            if (item.getItemId() == R.id.action_home) {
+//                replaceFragment(new HomeFragment());
+//            } else if (item.getItemId() == R.id.action_archive) {
+//                replaceFragment(new ArchieveFragment());
+//            } else if (item.getItemId() == R.id.action_notice) {
+//                replaceFragment(new NoticeFragment());
+//            }
+//            return true;
+//        });
     }
 
     private void replaceFragment(Fragment fragment){
