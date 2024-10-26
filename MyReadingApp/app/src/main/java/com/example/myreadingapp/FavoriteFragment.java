@@ -1,5 +1,6 @@
 package com.example.myreadingapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ public class FavoriteFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewFavorites);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // Set your adapter here for the favorites list
-        favoriteAdapter = new FavoriteAdapter(this);
+        favoriteAdapter = new FavoriteAdapter(requireContext());
 
         favoriteAdapter.setData(getListManga());
         recyclerView.setAdapter(favoriteAdapter);

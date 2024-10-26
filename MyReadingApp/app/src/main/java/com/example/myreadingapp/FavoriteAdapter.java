@@ -14,9 +14,9 @@ import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MangaViewHolder>{
 
-    private FavoriteFragment mContext;
+    private Context mContext;
     private List<Manga> mListManga;
-    public FavoriteAdapter(FavoriteFragment mContext) {
+    public FavoriteAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
