@@ -1,4 +1,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#7C7C7C" /> <!-- Set the color for the selected tab -->
-    <corners android:radius="16dp" /> <!-- Rounded corners -->
+    <gradient
+        android:startColor="#6A6A6A"
+        android:endColor="#ADADAD"
+        android:angle="90" />
+    <corners android:radius="16dp" />
 </shape>

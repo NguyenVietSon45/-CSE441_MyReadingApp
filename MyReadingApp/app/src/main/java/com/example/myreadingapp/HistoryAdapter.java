@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MangaViewHolder>{
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MangaViewHolder> {
 
     private Context mContext;
     private List<Manga> mListManga;
-    public FavoriteAdapter(Context mContext) {
+
+    public HistoryAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -27,13 +28,13 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MangaV
 
     @NonNull
     @Override
-    public MangaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favorite_item, parent, false);
+    public HistoryAdapter.MangaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_item, parent, false);
         return new MangaViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MangaViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HistoryAdapter.MangaViewHolder holder, int position) {
         Manga manga = mListManga.get(position);
         if (manga == null) {
             return;
@@ -41,6 +42,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MangaV
 
         holder.imgManga.setImageResource(manga.getResourceId());
         holder.tvName.setText(manga.getName());
+        holder.tvChapter.setText(manga.getChapter());
     }
 
     @Override
@@ -55,12 +57,13 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MangaV
 
         private ImageView imgManga;
         private TextView tvName;
+        private TextView tvChapter;
         public MangaViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgManga = itemView.findViewById(R.id.mangaThumbnail);
             tvName = itemView.findViewById(R.id.mangaTitle);
+            tvChapter = itemView.findViewById(R.id.mangaChapter);
         }
     }
-
 }

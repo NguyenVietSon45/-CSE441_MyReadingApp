@@ -20,6 +20,7 @@ public class FavoriteFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private FavoriteAdapter favoriteAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,16 +39,16 @@ public class FavoriteFragment extends Fragment {
 
     private List<Manga> getListManga() {
         List<Manga> list = new ArrayList<>();
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
+        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
 
         return list;
     }

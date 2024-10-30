@@ -38,15 +38,7 @@
             android:textStyle="bold"
             android:textSize="16sp" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/mangaChapter"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Manga: 1/123"-->
-<!--            android:textSize="14sp"-->
-<!--            android:visibility="gone" />-->
 
-        <!-- Button Layout -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +61,6 @@
                 android:text="Bỏ thích"
                 android:layout_marginStart="16dp" />
 
-            <!-- For history, replace with 'Đọc tiếp' -->
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

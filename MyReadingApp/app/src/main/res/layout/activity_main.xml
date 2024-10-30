@@ -23,17 +23,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
+        android:background="@android:color/transparent"
         app:tabBackground="@drawable/tab_background_selector"
         app:tabGravity="fill"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
-        app:tabPaddingEnd="16dp"
-        app:tabPaddingStart="16dp"
-        app:tabSelectedTextColor="@android:color/black"
-        app:tabTextColor="@android:color/black">
+        app:tabPaddingEnd="0dp"
+        app:tabPaddingStart="0dp"
+        android:paddingBottom="0dp"
+        android:paddingTop="0dp"
+        app:tabSelectedTextColor="#EBEBEB"
+        app:tabTextColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchView">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_favorites"
