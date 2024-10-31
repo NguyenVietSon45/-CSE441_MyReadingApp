@@ -12,42 +12,57 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryFragment extends Fragment {
     private RecyclerView recyclerView;
     private HistoryAdapter historyAdapter;
+    private ArrayList<Manga> list;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewHistory);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        // Set your adapter here for the history list
-        historyAdapter = new HistoryAdapter(requireContext());
+        recyclerView = view.findViewById(R.id.recyclerViewHistory);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        historyAdapter.setData(getListManga());
+        list = new ArrayList<>();
+        historyAdapter = new HistoryAdapter(requireContext());
+        historyAdapter.setData(list);
+
         recyclerView.setAdapter(historyAdapter);
 
+        DatabaseReference database = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("readingapp_db/comic");
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                list.clear();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Manga manga = dataSnapshot.getValue(Manga.class);
+                    if (manga != null && manga.getChapter() != null && manga.getTitle() != null) {
+                        list.add(manga);
+                    } else {
+                        System.err.println("Invalid manga data found in Firebase");
+                    }
+                }
+                historyAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.err.println("Error retrieving data from Firebase: " + error.getMessage());
+            }
+        });
         return view;
-    }
-
-    private List<Manga> getListManga() {
-        List<Manga> list = new ArrayList<>();
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "1/80"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "2/80"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "3/80"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "4/80"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "5/80"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "6/80"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "7/80"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "8/80"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "9/80"));
-        list.add(new Manga(R.drawable.sample_manga, "Shadow House", "10/80"));
-
-        return list;
     }
 }

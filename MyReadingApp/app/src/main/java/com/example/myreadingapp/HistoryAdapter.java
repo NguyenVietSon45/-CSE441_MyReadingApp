@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MangaViewHolder> {
@@ -40,8 +42,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MangaVie
             return;
         }
 
-        holder.imgManga.setImageResource(manga.getResourceId());
-        holder.tvName.setText(manga.getName());
+        Glide.with(mContext)
+                .load(manga.getImageUrl())
+                .placeholder(R.drawable.placeholder_img) // placeholder image
+                .error(R.drawable.error_img) // error image
+                .into(holder.imgManga);
+        holder.tvName.setText(manga.getTitle());
         holder.tvChapter.setText(manga.getChapter());
     }
 

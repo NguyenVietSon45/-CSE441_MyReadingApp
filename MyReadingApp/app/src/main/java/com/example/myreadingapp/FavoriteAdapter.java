@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,8 +40,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MangaV
             return;
         }
 
-        holder.imgManga.setImageResource(manga.getResourceId());
-        holder.tvName.setText(manga.getName());
+        Glide.with(mContext)
+                .load(manga.getImageUrl())
+                .placeholder(R.drawable.placeholder_img) // placeholder image
+                .error(R.drawable.error_img) // error image
+                .into(holder.imgManga);
+        holder.tvName.setText(manga.getTitle());
     }
 
     @Override
