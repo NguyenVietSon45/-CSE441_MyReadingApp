@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,8 @@ public class ProfileActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     ActivityProfileBinding binding;
 
-    Button btnLogout, btnSetting
+    Button btnLogout, btnSetting;
+    ImageView btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +65,23 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }));
 
-        btnLogout = findViewById(R.id.btn_logout);
-        btnLogout.setOnClickListener((new View.OnClickListener() {
+        btnSetting = findViewById(R.id.btn_account_setting);
+        btnSetting.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, SettingProfileActivity.class);
                 startActivity(intent);
             }
         }));
+
+        btnBack = findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //dark-light MODE
 //      getSupportActionBar().hide(); //no need bcs parent="Theme.AppCompat.NoActionBar"
@@ -83,8 +94,6 @@ public class ProfileActivity extends AppCompatActivity {
         if (nightMODE) {
             switcher.setChecked(true);
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
-
         }
 
         switcher.setOnClickListener(new View.OnClickListener() {

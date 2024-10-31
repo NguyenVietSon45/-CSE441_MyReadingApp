@@ -24,6 +24,7 @@
             android:layout_marginTop="20dp">
 
             <ImageView
+                android:id="@+id/btn_back"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/baseline_arrow_back_24" />
@@ -62,7 +63,7 @@
                 android:layout_marginStart="50dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_image"
+                    android:id="@+id/img_profile"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/yatoblink"
@@ -112,7 +113,7 @@
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:hint="Đổi tên tài khoản"
+                android:hint="Đổi mail liên kết"
                 android:drawableEnd="@drawable/edit"
                 android:layout_marginBottom="20dp"
                 android:textColor="@color/black"/>
@@ -120,7 +121,7 @@
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:hint="Đổi tên tài khoản"
+                android:hint="Đổi mật khẩu"
                 android:drawableEnd="@drawable/edit"
                 android:layout_marginBottom="20dp"
                 android:textColor="@color/black"/>

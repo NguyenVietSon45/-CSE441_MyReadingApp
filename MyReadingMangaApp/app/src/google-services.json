@@ -10,25 +10,6 @@
       "client_info": {
         "mobilesdk_app_id": "1:317036739410:android:65757938330567a915988b",
         "android_client_info": {
-          "package_name": "com.example.myreadingapp"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCAeTdzySIXHkeBZtAARzfqt3Gt_jogfj8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:317036739410:android:53eb95ae3ef050ea15988b",
-        "android_client_info": {
           "package_name": "com.example.myreadingapplication"
         }
       },

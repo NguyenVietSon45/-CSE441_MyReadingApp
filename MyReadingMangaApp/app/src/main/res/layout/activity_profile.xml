@@ -30,6 +30,7 @@
                 android:layout_marginTop="20dp">
 
                 <ImageView
+                    android:id="@+id/btn_back"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/baseline_arrow_back_24" />
@@ -110,7 +111,7 @@
 
 
             <Button
-                android:id="@+id/btn_account"
+                android:id="@+id/btn_account_setting"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="60dp"
@@ -147,17 +148,5 @@
 
         </LinearLayout>
     </FrameLayout>
-
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:menu="@menu/menu_bottom_navigation"
-        />
 
 </RelativeLayout>

@@ -16,8 +16,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myreadingapplication.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
 
 import Models.User;
 
@@ -28,6 +36,17 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     ImageView btnBack;
+
+    //kiểm tra định dạng email
+    private boolean isEmailValid(String email) {
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (email.matches(emailPattern)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,36 +63,60 @@ public class RegisterActivity extends AppCompatActivity {
         registerName = findViewById(R.id.edt_registerName);
         registerMail = findViewById(R.id.edt_registerMail);
         registerPass = findViewById(R.id.edt_registerPass);
+        registerConfirmPass = findViewById(R.id.edt_registerConfirmPass);
 
+        btnBack.setOnClickListener(v -> finish());
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+        btnRegister.setOnClickListener(v -> {
+            database = FirebaseDatabase.getInstance();
+            reference = database.getReference("users");
+
+            String username = registerName.getText().toString().trim();
+            String mail = registerMail.getText().toString().trim();
+            String pass = registerPass.getText().toString().trim();
+            String confirmPass = registerConfirmPass.getText().toString().trim();
+
+            //kiểm tra mật khẩu và xác nhận mật khẩu trùng khớp
+            if (!pass.equals(confirmPass)) {
+                Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
 
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                database = FirebaseDatabase.getInstance();
-                reference = database.getReference("users");
-
-                String username = registerName.getText().toString().trim();
-                String mail = registerMail.getText().toString().trim();
-                String pass = registerPass.getText().toString().trim();
-
-                User user = new User(username, mail, pass);
-                reference.child(username).setValue(user);
-
-                Toast.makeText(RegisterActivity.this, "You have sign up successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(intent);
+            //kiểm tra định dạng email
+            if (!isEmailValid(mail)) {
+                Toast.makeText(RegisterActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
 
+            // Kiểm tra xem email đã tồn tại trong database hay chưa
+            //orderByChild("email").equalTo(mail):truy vấn Firebase để tìm kiếm người dùng có email trùng khớp.
+            //addListenerForSingleValueEvent: nhận dữ liệu một lần và sau đó ngừng lắng nghe.
+            //dataSnapshot.exists(): Nếu tồn tại một bản ghi trùng vs email đã nhập, hiển thị thông báo rằng email đã tồn tại
+            reference.orderByChild("email").equalTo(mail).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        Toast.makeText(RegisterActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Tự động sinh ID duy nhất và lấy thời gian hiện tại để gán vào id và created_at của User
+                        String id = UUID.randomUUID().toString();
+                        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                        User user = new User(id, username, mail, pass, "https://example.com/default_avatar.png", currentTime);
+                        reference.child(id).setValue(user);
+
+                        Toast.makeText(RegisterActivity.this, "You have signed up successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+
+                //Khi có lỗi trong quá trình truy vấn, Firebase sẽ gọi hàm onCancelled() và truyền vào một đối tượng DatabaseError.
+                //DatabaseError để lấy thông tin về lỗi và hiển thị cho người dùng
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(RegisterActivity.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
     }
-
-
 }

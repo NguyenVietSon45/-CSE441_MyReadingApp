@@ -18,8 +18,9 @@ public class UserDB {
     private DatabaseReference mUsersRef;
 
     public UserDB() {
-        mDatabase = FirebaseDatabase.getInstance("https://comic4t-default-rtdb.asia-southeast1.firebasedatabase.app/");
-        mUsersRef = mDatabase.getReference("comic_db/users");
+        mDatabase = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app");
+//        mUsersRef = mDatabase.getReference("readingapp_db/user_db");
+
     }
 
     public interface UserCallback {
@@ -68,11 +69,17 @@ public class UserDB {
         String username = mUsersRef.push().getKey();
         user.setUsername(username);
         mUsersRef.child(username).setValue(user);
+
+        mUsersRef = FirebaseDatabase.getInstance().getReference("user_db");
+
+        String Id = mUsersRef.push().getKey(); // Tạo ID độc nhất
+        User data = new User(/* tham số */);
+        mUsersRef.child(Id).setValue(data);
     }
 
     //tim username bang email
     public void getUsernameByEmail(final String userName, final UserDB.UsernameCallback callback) {
-        mUsersRef.orderByChild("username").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+        mUsersRef.orderByChild("Id").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {

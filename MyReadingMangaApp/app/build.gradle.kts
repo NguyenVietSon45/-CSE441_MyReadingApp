@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 //    alias(libs.plugins.google.gms.google.services)
 }
 
@@ -58,6 +59,9 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-auth:21.0.1")
-    implementation ("com.google.firebase:firebase-storage:20.2.0")
+    implementation ("com.google.firebase:firebase-storage:21.0.1")
+
+    //
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
 
 }
