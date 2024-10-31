@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.myreadingapplication.Adapter.CategoryAdapter;
 import com.example.myreadingapplication.R;
 
@@ -74,8 +75,8 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,6 +97,11 @@ public class HomeFragment extends Fragment {
 
 
         imgProfile = view.findViewById(R.id.profile_image);
+        // Nhận URL avatar từ Intent
+        if (getActivity() != null && getActivity().getIntent() != null) {
+            String avatarUrl = getActivity().getIntent().getStringExtra("AVATAR_URL");
+            loadAvatar(avatarUrl); // Tải avatar
+        }
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +115,17 @@ public class HomeFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void loadAvatar(String avatarUrl) {
+        if (avatarUrl == null || avatarUrl.isEmpty()) {
+            avatarUrl = String.valueOf(R.drawable.none_avatar);
+        }
+
+        Glide.with(this)
+                .load(avatarUrl)
+                .error(R.drawable.none_avatar)
+                .into(imgProfile);
     }
 
     private List<Category> getListCategory(){

@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.myreadingapplication.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -32,6 +33,9 @@ public class SettingProfileActivity extends AppCompatActivity {
         });
 
         imgProfile = findViewById(R.id.img_profile);
+        // Nhận URL avatar từ Intent
+        String avatarUrl = getIntent().getStringExtra("AVATAR_URL");
+        loadAvatar(avatarUrl); // Tải avatar
         imgProfile.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,5 +51,16 @@ public class SettingProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void loadAvatar(String avatarUrl) {
+        if (avatarUrl == null || avatarUrl.isEmpty()) {
+            avatarUrl = String.valueOf(R.drawable.none_avatar);
+        }
+
+        Glide.with(this)
+                .load(avatarUrl)
+                .error(R.drawable.none_avatar)
+                .into(imgProfile);
     }
 }

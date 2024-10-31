@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.example.myreadingapplication.R;
 import com.example.myreadingapplication.databinding.ActivityMainBinding;
 import com.example.myreadingapplication.databinding.ActivityProfileBinding;
@@ -38,7 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
     ActivityProfileBinding binding;
 
     Button btnLogout, btnSetting;
-    ImageView btnBack;
+    ImageView btnBack, imgProfile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,11 @@ public class ProfileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        imgProfile = findViewById(R.id.profile_image);
+        // Nhận URL avatar từ Intent
+        String avatarUrl = getIntent().getStringExtra("AVATAR_URL");
+        loadAvatar(avatarUrl); // Tải avatar
 
         btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener((new View.OnClickListener() {
@@ -126,6 +133,17 @@ public class ProfileActivity extends AppCompatActivity {
 //            }
 //            return true;
 //        });
+    }
+
+    private void loadAvatar(String avatarUrl) {
+        if (avatarUrl == null || avatarUrl.isEmpty()) {
+            avatarUrl = String.valueOf(R.drawable.none_avatar);
+        }
+
+        Glide.with(this)
+                .load(avatarUrl)
+                .error(R.drawable.none_avatar)
+                .into(imgProfile);
     }
 
     private void replaceFragment(Fragment fragment){

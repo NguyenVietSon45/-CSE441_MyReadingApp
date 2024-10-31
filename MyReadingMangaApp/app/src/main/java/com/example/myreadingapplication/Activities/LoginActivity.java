@@ -118,9 +118,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     loginEmail.setError(null);
-                    String passwordFromDB = null; // Khai báo biến ở đây
+                    String passwordFromDB = null;
+                    String avatarUrl = null;
+
+                    //lấy data từ firebase
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         passwordFromDB = userSnapshot.child("password").getValue(String.class);
+                        avatarUrl = userSnapshot.child("avt_url").getValue(String.class);
                     }
                     //snapshot.getKey(): trả về khóa (ID) của nút người dùng trong cơ sở dữ liệu Firebase.
                     //Objects.requireNonNull() đảm bảo rằng snapshot.getKey() không trả về null trước khi sử dụng nó.
@@ -130,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                     // print the values for debugging
                     System.out.println("passwordFromDB: " + passwordFromDB);
                     System.out.println("password: " + password);
+                    System.out.println("avatarUrl: " + avatarUrl);
 
 
                     //compare password stored in dtb with password provided by user
@@ -140,6 +145,8 @@ public class LoginActivity extends AppCompatActivity {
                         // Mở MainActivity và điều hướng đến HomeFragment
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("FRAGMENT", "HOME"); // Thêm extra để xác định Fragment nào sẽ mở
+                        intent.putExtra("AVATAR_URL", avatarUrl);
+
                         startActivity(intent);
                         finish(); // Kết thúc LoginActivity
                     }
