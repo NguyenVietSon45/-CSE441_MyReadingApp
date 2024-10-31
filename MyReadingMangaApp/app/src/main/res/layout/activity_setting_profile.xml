@@ -83,15 +83,31 @@
             </FrameLayout>
 
 
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="30dp"
-                android:text="Username"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                style="@style/TEXT"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:text="Username"
+                    android:textAlignment="center"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    style="@style/TEXT"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:text="email"
+                    android:textAlignment="center"
+                    android:textSize="20dp"
+                    android:textStyle="italic"
+                    style="@style/TEXT"/>
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

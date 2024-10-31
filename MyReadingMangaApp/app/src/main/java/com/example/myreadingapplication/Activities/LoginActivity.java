@@ -26,7 +26,7 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText loginName, loginPass;
+    EditText loginEmail, loginPass;
     TextView txtForgotPassword;
     Button btnSignUp, btnLogin;
 
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        loginName = findViewById(R.id.edt_loginName);
+        loginEmail = findViewById(R.id.edt_loginEmail);
         loginPass = findViewById(R.id.edt_loginPass);
         btnLogin = findViewById(R.id.btn_login);
         btnSignUp = findViewById(R.id.btn_sign_up);
@@ -70,8 +70,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!validateUsername() | !validatePassword()){
-                    //if validateUsername()or validatePassword() false, nothing work
+                if (!validateEmail() | !validatePassword()){
+                    //if validateEmail()or validatePassword() false, nothing work
                 } else {
                     checkUser();
                 }
@@ -80,14 +80,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //kiem tra username empty
-    public boolean validateUsername(){
-        String val = loginName.getText().toString();
+    //kiem tra email empty
+    public boolean validateEmail(){
+        String val = loginEmail.getText().toString();
         if (val.isEmpty()){
-            loginName.setError("Username cannot be empty.");
+            loginEmail.setError("Email cannot be empty.");
             return false;
         } else {
-            loginName.setError(null);
+            loginEmail.setError(null);
             return true;
         }
     }
@@ -106,23 +106,37 @@ public class LoginActivity extends AppCompatActivity {
 
     //check user in database or not
     public void checkUser(){
-        String username = loginName.getText().toString().trim();
+        String email = loginEmail.getText().toString().trim();
         String password = loginPass.getText().toString().trim();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        //compare username stored in dtb with username provided by user
-        Query checkUserDatabase = reference.orderByChild("username").equalTo(username);
+        //compare email stored in dtb with email provided by user
+        Query checkUserDatabase = reference.orderByChild("email").equalTo(email);
 
         checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    loginName.setError(null);
-                    String passwordFromDB = snapshot.child(username).child("password").getValue(String.class);
+                    loginEmail.setError(null);
+                    String passwordFromDB = null; // Khai báo biến ở đây
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        passwordFromDB = userSnapshot.child("password").getValue(String.class);
+                    }
+                    //snapshot.getKey(): trả về khóa (ID) của nút người dùng trong cơ sở dữ liệu Firebase.
+                    //Objects.requireNonNull() đảm bảo rằng snapshot.getKey() không trả về null trước khi sử dụng nó.
+                    //Sau đó, chúng ta sử dụng child(snapshot.getKey()) để truy cập vào nút người dùng dựa trên ID.
+
+
+                    // print the values for debugging
+                    System.out.println("passwordFromDB: " + passwordFromDB);
+                    System.out.println("password: " + password);
+
 
                     //compare password stored in dtb with password provided by user
-                    if (passwordFromDB.equals(password)) {
-                        loginName.setError(null);
+                    if (passwordFromDB != null && passwordFromDB.equals(password)) {
+                        loginEmail.setError(null);
+                        loginPass.setError(null);
+
                         // Mở MainActivity và điều hướng đến HomeFragment
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("FRAGMENT", "HOME"); // Thêm extra để xác định Fragment nào sẽ mở
@@ -134,8 +148,8 @@ public class LoginActivity extends AppCompatActivity {
                         loginPass.requestFocus();
                     }
                 } else {
-                    loginName.setError("User does not exist");
-                    loginName.requestFocus();
+                    loginEmail.setError("User does not exist");
+                    loginEmail.requestFocus();
                 }
             }
 

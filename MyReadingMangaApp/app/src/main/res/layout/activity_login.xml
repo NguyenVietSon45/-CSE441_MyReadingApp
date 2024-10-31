@@ -39,13 +39,13 @@
             app:cardCornerRadius="15dp">
 
             <EditText
-                android:id="@+id/edt_loginName"
+                android:id="@+id/edt_loginEmail"
                 android:layout_width="323dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="40dp"
                 android:ems="10"
-                android:hint="Username"
+                android:hint="Email"
                 android:inputType="text"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"/>
