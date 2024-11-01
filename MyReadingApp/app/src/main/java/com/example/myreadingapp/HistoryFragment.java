@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HistoryFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -49,7 +50,9 @@ public class HistoryFragment extends Fragment {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Manga manga = dataSnapshot.getValue(Manga.class);
-                    if (manga != null && manga.getChapter() != null && manga.getTitle() != null) {
+//                    String key = dataSnapshot.getKey();
+//                    Toast.makeText(requireContext(), "ID: " + key, Toast.LENGTH_SHORT).show();
+                    if (manga != null && manga.getRecentChapter() != null && manga.getTitle() != null) {
                         list.add(manga);
                     } else {
                         System.err.println("Invalid manga data found in Firebase");

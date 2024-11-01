@@ -48,7 +48,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MangaVie
                 .error(R.drawable.error_img) // error image
                 .into(holder.imgManga);
         holder.tvName.setText(manga.getTitle());
-        holder.tvChapter.setText(manga.getChapter());
+        holder.tvChapter.setText(manga.getRecentChapter());
     }
 
     @Override

@@ -7,16 +7,16 @@ public class Manga {
     private String genre;
     private String summary;
     private Boolean favorite;
-    private String chapter;
+    private String recentChapter;
 
-    public Manga(String imageUrl, String author, String title, String genre, String summary, Boolean favorite, String chapter) {
+    public Manga(String imageUrl, String author, String title, String genre, String summary, Boolean favorite, String recentChapter) {
         this.imageUrl = imageUrl;
         this.author = author;
         this.title = title;
         this.genre = genre;
         this.summary = summary;
         this.favorite = favorite;
-        this.chapter = chapter;
+        this.recentChapter = recentChapter;
     }
 
     public Manga() {
@@ -71,11 +71,11 @@ public class Manga {
         this.title = title;
     }
 
-    public String getChapter() {
-        return chapter;
+    public String getRecentChapter() {
+        return recentChapter;
     }
 
-    public void setChapter(String chapter) {
-        this.chapter = chapter;
+    public void setRecentChapter(String recentChapter) {
+        this.recentChapter = recentChapter;
     }
 }
