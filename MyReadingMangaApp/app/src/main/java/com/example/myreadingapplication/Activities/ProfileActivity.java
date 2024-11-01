@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -64,13 +65,9 @@ public class ProfileActivity extends AppCompatActivity {
         loadAvatar(avatarUrl); // Tải avatar
 
         btnLogout = findViewById(R.id.btn_logout);
-        btnLogout.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        }));
+        btnLogout.setOnClickListener(v -> {
+            logout();
+        });
 
         btnSetting = findViewById(R.id.btn_account_setting);
         btnSetting.setOnClickListener((new View.OnClickListener() {
@@ -151,5 +148,24 @@ public class ProfileActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout_profile, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void logout() {
+        // Xóa thông tin đăng nhập từ SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("email");
+        editor.remove("id");
+        editor.remove("password");
+        editor.remove("username");
+        editor.apply();
+
+        // In ra thông báo để kiểm tra
+        Log.d("ProfileActivity", "Đăng xuất tài khoản thành công");
+
+        // Chuyển hướng người dùng đến màn hình đăng nhập
+        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish(); // Kết thúc hoạt động của ProfileActivity
     }
 }

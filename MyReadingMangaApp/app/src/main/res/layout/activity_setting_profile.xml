@@ -89,6 +89,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_name_user"
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:text="Username"
@@ -99,6 +100,7 @@
                     android:layout_marginTop="20dp"/>
 
                 <TextView
+                    android:id="@+id/tv_email"
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:text="email"

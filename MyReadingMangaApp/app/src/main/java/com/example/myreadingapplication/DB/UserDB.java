@@ -19,8 +19,7 @@ public class UserDB {
 
     public UserDB() {
         mDatabase = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app");
-//        mUsersRef = mDatabase.getReference("readingapp_db/user_db");
-
+        mUsersRef = mDatabase.getReference("users"); // Khởi tạo mUsersRef
     }
 
     public interface UserCallback {
@@ -51,9 +50,9 @@ public class UserDB {
         });
     }
 
-    // lay user theo username
-    public void getUserByUsername(String username, final UserCallback callback) {
-        mUsersRef.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+    // lấy user theo id
+    public void getUserById(String userId, final UserCallback callback) {
+        mUsersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
@@ -70,7 +69,7 @@ public class UserDB {
         user.setUsername(username);
         mUsersRef.child(username).setValue(user);
 
-        mUsersRef = FirebaseDatabase.getInstance().getReference("user_db");
+        mUsersRef = FirebaseDatabase.getInstance().getReference("users");
 
         String Id = mUsersRef.push().getKey(); // Tạo ID độc nhất
         User data = new User(/* tham số */);

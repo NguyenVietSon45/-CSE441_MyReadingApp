@@ -99,10 +99,10 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
                     } else {
                         // Tự động sinh ID duy nhất và lấy thời gian hiện tại để gán vào id và created_at của User
-                        String id = UUID.randomUUID().toString();
-                        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                        User user = new User(id, username, mail, pass, "https://example.com/default_avatar.png", currentTime);
-                        reference.child(id).setValue(user);
+                        DatabaseReference newUserRef = reference.push();
+                        String id = newUserRef.getKey();                        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                        User user = new User(id, username, mail, pass, "https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png?w=512&ssl=1", currentTime);
+                        newUserRef.setValue(user);
 
                         Toast.makeText(RegisterActivity.this, "You have signed up successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);

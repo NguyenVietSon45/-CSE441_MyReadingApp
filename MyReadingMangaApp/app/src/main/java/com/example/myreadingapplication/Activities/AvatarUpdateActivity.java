@@ -123,11 +123,19 @@ public class AvatarUpdateActivity extends AppCompatActivity {
     }
 
     private void uploadProfileImage() {
-        StorageReference filePath = storageProfilePicsRef.child(System.currentTimeMillis() + ".jpg");
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if (userId != null) {
+            System.out.println("User ID: " + userId);
+        } else {
+            System.out.println("Failed to get user ID");
+        }
+
+        StorageReference filePath = storageProfilePicsRef.child(userId + ".jpg");
         filePath.putFile(uriImage).addOnSuccessListener(taskSnapshot -> {
             filePath.getDownloadUrl().addOnSuccessListener(uri -> {
                 String downloadUrl = uri.toString();
-                databaseReference.push().child("user").child("avt_url").setValue(downloadUrl).addOnCompleteListener(task -> {
+                DatabaseReference userRef = databaseReference.child(userId);
+                userRef.child("avt_url").setValue(downloadUrl).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(AvatarUpdateActivity.this, "Cập nhật ảnh thành công!", Toast.LENGTH_SHORT).show();
                     } else {
