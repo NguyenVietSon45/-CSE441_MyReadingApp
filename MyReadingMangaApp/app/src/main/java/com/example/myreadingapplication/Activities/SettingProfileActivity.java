@@ -81,17 +81,17 @@ public class SettingProfileActivity extends AppCompatActivity {
                 .into(imgProfile);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        usersDB.getUserById(user_id, new UserDB.UserCallback() {
-            @Override
-            public void onUserLoaded(User user) {
-                currentUser = user;
-                setupUI();
-            }
-        });
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        usersDB.getUserById(user_id, new UserDB.UserCallback() {
+//            @Override
+//            public void onUserLoaded(User user) {
+//                currentUser = user;
+//                setupUI();
+//            }
+//        });
+//    }
 
     //thiết lập giao diện người dùng dựa trên thông tin của người dùng hiện tại.
     private void setupUI() {

@@ -49,6 +49,8 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
             return mMangas.size();
         }
         return 0;
+
+
     }
 
     public  class MangaViewHolder extends RecyclerView.ViewHolder{

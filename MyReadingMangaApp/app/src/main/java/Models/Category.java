@@ -22,9 +22,9 @@ public class Category {
         this.nameCategory = nameCategory;
     }
 
-    public List<Manga> getMangas() {
-        return mangas;
-    }
+//    public List<Manga> getMangas() {
+//        return mangas;
+//    }
 
     public void setMangas(List<Manga> mangas) {
         this.mangas = mangas;

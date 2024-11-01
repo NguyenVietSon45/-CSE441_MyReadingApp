@@ -100,7 +100,8 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         // Tự động sinh ID duy nhất và lấy thời gian hiện tại để gán vào id và created_at của User
                         DatabaseReference newUserRef = reference.push();
-                        String id = newUserRef.getKey();                        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                        String id = newUserRef.getKey();
+                        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                         User user = new User(id, username, mail, pass, "https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png?w=512&ssl=1", currentTime);
                         newUserRef.setValue(user);
 
@@ -117,6 +118,11 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+
+//            // Trong RegisterActivity, sau khi người dùng đăng ký thành công:
+//            Intent intent = new Intent(RegisterActivity.this, Dang_truyen.class);
+//            intent.putExtra("USER_ID", id); // Gửi user_id
+//            startActivity(intent);
         });
     }
 }

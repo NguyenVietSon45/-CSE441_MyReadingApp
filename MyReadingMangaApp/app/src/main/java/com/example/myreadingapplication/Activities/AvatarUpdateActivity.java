@@ -1,9 +1,11 @@
 package com.example.myreadingapplication.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -123,7 +125,9 @@ public class AvatarUpdateActivity extends AppCompatActivity {
     }
 
     private void uploadProfileImage() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userId = "-OAaftwv4Y-UqBY6SJSo";
+        Log.d("Id user:", userId);
+
         if (userId != null) {
             System.out.println("User ID: " + userId);
         } else {
