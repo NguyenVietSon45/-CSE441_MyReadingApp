@@ -54,7 +54,7 @@
                 android:text="Đọc" />
 
             <Button
-                android:id="@+id/btnRemoveFavorite"
+                android:id="@+id/btnContinue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#9D9D9D"

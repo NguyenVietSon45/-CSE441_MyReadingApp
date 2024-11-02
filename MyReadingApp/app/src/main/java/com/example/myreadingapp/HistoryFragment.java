@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +26,8 @@ import java.util.ArrayList;
 public class HistoryFragment extends Fragment {
     private RecyclerView recyclerView;
     private HistoryAdapter historyAdapter;
-    private ArrayList<Manga> list;
+    private ArrayList<History> list;
+    private DatabaseReference database;
 
     @Nullable
     @Override
@@ -41,31 +43,69 @@ public class HistoryFragment extends Fragment {
 
         recyclerView.setAdapter(historyAdapter);
 
-        DatabaseReference database = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("readingapp_db/comic");
-        database.addValueEventListener(new ValueEventListener() {
+        // Initialize the database reference
+        database = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
+        listenForHistoryUpdates("-OAafiSII85n1L0Czcn1"); // Replace with actual user ID logic
+
+        return view;
+    }
+
+    private void listenForHistoryUpdates(String userId) {
+        DatabaseReference historyRef = database.child("readingapp_db").child("history");
+        historyRef.orderByChild("user_id").equalTo(userId).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                handleHistoryChange(snapshot);
+            }
 
-                list.clear();
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                handleHistoryChange(snapshot);
+            }
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Manga manga = dataSnapshot.getValue(Manga.class);
-//                    String key = dataSnapshot.getKey();
-//                    Toast.makeText(requireContext(), "ID: " + key, Toast.LENGTH_SHORT).show();
-                    if (manga != null && manga.getRecentChapter() != null && manga.getTitle() != null) {
-                        list.add(manga);
-                    } else {
-                        System.err.println("Invalid manga data found in Firebase");
-                    }
-                }
-                historyAdapter.notifyDataSetChanged();
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//                String id = snapshot.child("id").getValue(String.class);
+//                if (id != null) {
+//                    for (int i = 0; i < list.size(); i++) {
+//                        if (list.get(i).getId().equals(id)) {
+//                            list.remove(i);
+//                            historyAdapter.notifyItemRemoved(i);
+//                            break;
+//                        }
+//                    }
+//                }
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                // Not needed for this use case
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                System.err.println("Error retrieving data from Firebase: " + error.getMessage());
+                System.err.println("Error retrieving history data: " + error.getMessage());
             }
         });
-        return view;
     }
+
+    private void handleHistoryChange(DataSnapshot historySnapshot) {
+        History history = historySnapshot.getValue(History.class);
+        if (history != null) {
+            boolean exists = false;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getChapter_id().equals(history.getChapter_id())) {
+                    list.set(i, history);
+                    historyAdapter.notifyItemChanged(i);
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                list.add(history);
+                historyAdapter.notifyItemInserted(list.size() - 1);
+            }
+        }
+    }
+
 }

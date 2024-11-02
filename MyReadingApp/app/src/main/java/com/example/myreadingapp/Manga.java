@@ -2,25 +2,55 @@ package com.example.myreadingapp;
 
 public class Manga {
     private String imageUrl;
-    private String author;
+    private String authorId;
     private String title;
     private String genre;
     private String summary;
     private Boolean favorite;
     private String recentChapter;
+    private Long created_at;
+    private String description;
+    private String id;
 
-    public Manga(String imageUrl, String author, String title, String genre, String summary, Boolean favorite, String recentChapter) {
+    public Manga(String imageUrl, String authorId, String title, String genre, String summary, Boolean favorite, String recentChapter, Long created_at, String description, String id) {
         this.imageUrl = imageUrl;
-        this.author = author;
+        this.authorId = authorId;
         this.title = title;
         this.genre = genre;
         this.summary = summary;
         this.favorite = favorite;
         this.recentChapter = recentChapter;
+        this.created_at = created_at;
+        this.description = description;
+        this.id = id;
     }
 
     public Manga() {
 
+    }
+
+    public Long getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Long created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Boolean getFavorite() {
@@ -31,12 +61,12 @@ public class Manga {
         this.favorite = favorite;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
     public String getGenre() {
