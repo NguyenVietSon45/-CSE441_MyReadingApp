@@ -78,39 +78,39 @@ public class MangaInfoActivity extends AppCompatActivity {
         rcvChapter.setAdapter(mchapterAdapter);
     }
 
-//    // tìm truyện theo id
-//    private void getMangaById(String mangaID) {
-//        Log.d("DMMMMM2", mangaID);
-//
-//        mMangaRef.child("-OAafiSII85n1L0Czcn1").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                User curManga = snapshot.getValue(User.class);
-//                Log.d("DMMMMM3", "title");
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) { }
-//        });
-//        Log.d("DMMMMM4", "title");
-//    }
-//
-//    private void getListChapter(){
-//        myChapterRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                    Chapter chapter = dataSnapshot.getValue(Chapter.class);
-//                    mListChapter.add(chapter);
-//                    Log.d("Chapter: ", chapter.getId());
-//                }
-//                mchapterAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(MangaInfoActivity.this, "Get list chapter failed", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    // tìm truyện theo id
+    private void getMangaById(String mangaID) {
+        Log.d("DMMMMM2", mangaID);
+
+        mMangaRef.child("-OAafiSII85n1L0Czcn1").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User curManga = snapshot.getValue(User.class);
+                Log.d("DMMMMM3", "title");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+        Log.d("DMMMMM4", "title");
+    }
+
+    private void getListChapter(){
+        myChapterRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Chapter chapter = dataSnapshot.getValue(Chapter.class);
+                    mListChapter.add(chapter);
+                    Log.d("Chapter: ", chapter.getId());
+                }
+                mchapterAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MangaInfoActivity.this, "Get list chapter failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

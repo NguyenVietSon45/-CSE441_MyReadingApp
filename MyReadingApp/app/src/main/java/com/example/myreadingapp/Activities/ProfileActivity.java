@@ -30,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import com.example.myreadingapp.Models.User;
+import com.squareup.picasso.Picasso;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -145,13 +147,12 @@ public class ProfileActivity extends AppCompatActivity {
         databaseRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot == null) return;
                 User curUser = snapshot.getValue(User.class);
                 if (curUser.getAvt_url().equals("")) {
                     imgProfile.setImageResource(R.drawable.none_avatar);
-
-                }
-                else {
-                    Log.d("avt_profile_actDMMMMMMM", curUser.getAvt_url());
+                } else {
+                    Picasso.get().load(curUser.getAvt_url()).into(imgProfile);
                 }
             }
 
