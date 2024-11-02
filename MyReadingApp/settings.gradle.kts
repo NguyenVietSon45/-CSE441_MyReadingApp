@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MyReadingApp"
+rootProject.name = "MyReadingAppli"
 include(":app")

@@ -25,55 +25,66 @@
                     android:src="@drawable/img" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="25dp"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="10dp">
 
-
-                    <Space
-                        android:layout_width="10dp"
-                        android:layout_height="0dp" />
 
                     <SearchView
+                        android:id="@+id/search_view"
                         android:layout_width="250dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:background="@color/white" />
-
-                    <Space
-                        android:layout_width="10dp"
-                        android:layout_height="0dp" />
+                        android:layout_height="wrap_content"
+                        android:iconifiedByDefault="false"
+                        android:queryHint="Tìm kiếm truyện..."
+                        android:background="@color/white"
+                        android:padding="5dp"/>
 
                     <ImageView
                         android:id="@+id/sort"
                         android:layout_width="36dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/icon_sort" />
-
+                        android:src="@drawable/icon_sort"
+                        android:layout_marginLeft="10dp"
+                        android:contentDescription="Sort" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <Spinner
                     android:id="@+id/spn_genre_1"
-                    android:layout_width="260dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:background="#FFFCFC"/>
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:padding="5dp"/>
+
                 <Button
+                    android:id="@+id/btn_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tìm kiếm"
                     android:backgroundTint="#807D7D"
-                    android:layout_marginLeft="15dp"/>
+                    android:layout_marginTop="10dp"/>
             </LinearLayout>
+
+            <!-- RecyclerView để hiển thị các truyện theo hàng ngang -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sortedManga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:clipToPadding="false"
+                android:scrollbars="horizontal"/>
+
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

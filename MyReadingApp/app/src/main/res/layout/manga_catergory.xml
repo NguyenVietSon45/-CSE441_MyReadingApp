@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="189dp"
+        android:layout_height="63dp"
+        android:layout_marginLeft="45dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/manga_category"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="177dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

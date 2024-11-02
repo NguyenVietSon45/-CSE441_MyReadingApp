@@ -1,4 +1,4 @@
-package com.example.myreadingapp;
+package com.example.myreadingappli;
 
 import org.junit.Test;
 
