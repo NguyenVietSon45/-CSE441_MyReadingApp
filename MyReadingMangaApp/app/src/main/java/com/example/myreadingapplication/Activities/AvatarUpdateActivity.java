@@ -21,12 +21,14 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 import com.example.myreadingapplication.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.Objects;
 
@@ -34,8 +36,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AvatarUpdateActivity extends AppCompatActivity {
 
-    ImageView imgProfile, btnBack;
+    CircleImageView imgProfile;
+    ImageView btnBack;
     Button btnUpload, btnSave, btnDelete;
+    String userId;
 
     private Uri uriImage; // Biến để lưu trữ URI của ảnh
     private DatabaseReference databaseReference;
@@ -73,6 +77,10 @@ public class AvatarUpdateActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
         storageProfilePicsRef = FirebaseStorage.getInstance().getReference().child("profile_pics");        //Lấy đối tượng StorageReference để truy cập và thao tác dữ liệu trong Firebase Storage, cụ thể là thư mục "Profile Pic".
 
+
+        // Lấy ID người dùng từ SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        userId = sharedPreferences.getString("id", null); // Lấy ID người dùng
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,30 +133,23 @@ public class AvatarUpdateActivity extends AppCompatActivity {
     }
 
     private void uploadProfileImage() {
-        String userId = "-OAaftwv4Y-UqBY6SJSo";
-        Log.d("Id user:", userId);
-
         if (userId != null) {
             System.out.println("User ID: " + userId);
         } else {
             System.out.println("Failed to get user ID");
         }
 
-        StorageReference filePath = storageProfilePicsRef.child(userId + ".jpg");
-        filePath.putFile(uriImage).addOnSuccessListener(taskSnapshot -> {
+        StorageReference filePath = storageProfilePicsRef.child(userId + "avt");
+        UploadTask uploadTask = filePath.putFile(uriImage);
+        uploadTask.addOnSuccessListener(taskSnapshot -> {
             filePath.getDownloadUrl().addOnSuccessListener(uri -> {
-                String downloadUrl = uri.toString();
-                DatabaseReference userRef = databaseReference.child(userId);
-                userRef.child("avt_url").setValue(downloadUrl).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(AvatarUpdateActivity.this, "Cập nhật ảnh thành công!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(AvatarUpdateActivity.this, "Cập nhật ảnh thất bại!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                databaseReference.child(userId).child("avt_url")
+                        .setValue(uri.toString())
+                        .addOnSuccessListener(unused -> {
+                            Toast.makeText(this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        });
             });
-        }).addOnFailureListener(e -> {
-            Toast.makeText(AvatarUpdateActivity.this, "Upload ảnh thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
+
     }
 }

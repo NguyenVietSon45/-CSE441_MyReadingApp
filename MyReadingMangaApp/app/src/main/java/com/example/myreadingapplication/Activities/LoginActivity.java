@@ -1,7 +1,9 @@
 package com.example.myreadingapplication.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -120,11 +122,13 @@ public class LoginActivity extends AppCompatActivity {
                     loginEmail.setError(null);
                     String passwordFromDB = null;
                     String avatarUrl = null;
+                    String id = null;
 
                     //lấy data từ firebase
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                        passwordFromDB = userSnapshot.child("password").getValue(String.class);
-                        avatarUrl = userSnapshot.child("avt_url").getValue(String.class);
+                        passwordFromDB = userSnapshot.child("password").getValue(String.class); //lay password tu firebase
+                        avatarUrl = userSnapshot.child("avt_url").getValue(String.class); //lay avt tu firebase
+                        id = userSnapshot.child("id").getValue(String.class);  //lay id tu firebase
                     }
                     //snapshot.getKey(): trả về khóa (ID) của nút người dùng trong cơ sở dữ liệu Firebase.
                     //Objects.requireNonNull() đảm bảo rằng snapshot.getKey() không trả về null trước khi sử dụng nó.
@@ -135,12 +139,19 @@ public class LoginActivity extends AppCompatActivity {
                     System.out.println("passwordFromDB: " + passwordFromDB);
                     System.out.println("password: " + password);
                     System.out.println("avatarUrl: " + avatarUrl);
-
+                    System.out.println("id: " + id);
 
                     //compare password stored in dtb with password provided by user
                     if (passwordFromDB != null && passwordFromDB.equals(password)) {
                         loginEmail.setError(null);
                         loginPass.setError(null);
+
+                        // Lưu ID người dùng vào SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("id", id); // Lưu ID vào SharedPreferences
+                        editor.putString("avt_url", avatarUrl); // Lưu avt vào SharedPreferences
+                        editor.apply(); // Lưu thay đổi
 
                         // Mở MainActivity và điều hướng đến HomeFragment
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

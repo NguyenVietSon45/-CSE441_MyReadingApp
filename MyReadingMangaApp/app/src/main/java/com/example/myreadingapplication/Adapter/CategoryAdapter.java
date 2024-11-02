@@ -105,7 +105,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     Log.d("Tên:", manga.getTitle());
                 }
                 mangaAdapter.notifyDataSetChanged();
-
             }
 
             @Override

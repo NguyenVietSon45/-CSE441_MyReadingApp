@@ -30,6 +30,15 @@ import com.example.myreadingapplication.databinding.ActivityMainBinding;
 import com.example.myreadingapplication.databinding.ActivityProfileBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import Models.User;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -38,9 +47,12 @@ public class ProfileActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ActivityProfileBinding binding;
+    FirebaseDatabase database;
+    DatabaseReference databaseRef;
 
     Button btnLogout, btnSetting;
-    ImageView btnBack, imgProfile;
+    CircleImageView imgProfile;
+    ImageView btnBack;
 
 
     @Override
@@ -52,7 +64,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         EdgeToEdge.enable(this);
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.profile), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -60,10 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         imgProfile = findViewById(R.id.profile_image);
-        // Nhận URL avatar từ Intent
-        String avatarUrl = getIntent().getStringExtra("AVATAR_URL");
-        loadAvatar(avatarUrl); // Tải avatar
-
         btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(v -> {
             logout();
@@ -132,15 +139,33 @@ public class ProfileActivity extends AppCompatActivity {
 //        });
     }
 
-    private void loadAvatar(String avatarUrl) {
-        if (avatarUrl == null || avatarUrl.isEmpty()) {
-            avatarUrl = String.valueOf(R.drawable.none_avatar);
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        Glide.with(this)
-                .load(avatarUrl)
-                .error(R.drawable.none_avatar)
-                .into(imgProfile);
+        // Lấy avt_url người dùng từ SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String id = sharedPreferences.getString("id", ""); // Lấy id người dùng
+
+        database = FirebaseDatabase.getInstance();
+        databaseRef = database.getReference("users");
+        // Lấy dữ liệu từ Firebase Realtime Database
+        databaseRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User curUser = snapshot.getValue(User.class);
+                if (curUser.getAvt_url().equals("")) {
+                    imgProfile.setImageResource(R.drawable.none_avatar);
+
+                }
+                else {
+                    Log.d("avt_profile_actDMMMMMMM", curUser.getAvt_url());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
     }
 
     private void replaceFragment(Fragment fragment){

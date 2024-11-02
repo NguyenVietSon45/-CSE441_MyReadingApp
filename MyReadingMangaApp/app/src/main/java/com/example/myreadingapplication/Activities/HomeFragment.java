@@ -91,7 +91,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -118,7 +117,7 @@ public class HomeFragment extends Fragment {
         // Nhận URL avatar từ Intent
         if (getActivity() != null && getActivity().getIntent() != null) {
             String avatarUrl = getActivity().getIntent().getStringExtra("AVATAR_URL");
-            loadAvatar(avatarUrl); // Tải avatar
+//            loadAvatar(avatarUrl); // Tải avatar
         }
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,17 +132,6 @@ public class HomeFragment extends Fragment {
 
 
         return view;
-    }
-
-    private void loadAvatar(String avatarUrl) {
-        if (avatarUrl == null || avatarUrl.isEmpty()) {
-            avatarUrl = String.valueOf(R.drawable.none_avatar);
-        }
-
-        Glide.with(this)
-                .load(avatarUrl)
-                .error(R.drawable.none_avatar)
-                .into(imgProfile);
     }
 
     private void clickAddAllMangas(){

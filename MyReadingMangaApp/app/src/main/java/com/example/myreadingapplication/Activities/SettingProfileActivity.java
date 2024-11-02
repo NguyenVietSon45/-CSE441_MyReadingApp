@@ -14,7 +14,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.myreadingapplication.DB.UserDB;
 import com.example.myreadingapplication.R;
 import com.squareup.picasso.Picasso;
 
@@ -27,7 +26,6 @@ public class SettingProfileActivity extends AppCompatActivity {
     private ImageView btnBack;
     private TextView tv_name, tv_email;
 
-    private UserDB usersDB;
     private String user_id;
     private User currentUser;
     private SharedPreferences sharedPreferences;
@@ -67,7 +65,6 @@ public class SettingProfileActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         user_id = sharedPreferences.getString("id", "");
 
-        usersDB = new UserDB();
     }
 
     private void loadAvatar(String avatarUrl) {
