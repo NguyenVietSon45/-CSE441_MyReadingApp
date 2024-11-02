@@ -23,17 +23,15 @@ import java.util.List;
 import com.example.myreadingapp.Models.Category;
 import com.example.myreadingapp.Models.Manga;
 
-
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>{
 
     private Context mcontext;
     private List<Category> mListCategory;
     private List<Manga> mlistManga;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference myRef;
     private MangaAdapter mangaAdapter;
-    // truyền hết các list vào đây từ Home:
-    // truyền từng list vào các adapter con
 
     public CategoryAdapter(Context mcontext) {
         this.mcontext = mcontext;
@@ -43,6 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         this.mListCategory = list;
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,6 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.rcvManga.setAdapter(mangaAdapter);
 
         getListMangaFromRealtimeDatabase();
+
     }
 
     @Override
@@ -77,36 +77,33 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
-
         private TextView tvNameCategory;
         private RecyclerView rcvManga;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNameCategory = itemView.findViewById(R.id.tv_name_category);
-            rcvManga = itemView.findViewById(R.id.rcv_manga);        }
+            rcvManga = itemView.findViewById(R.id.rcv_manga);
+        }
     }
 
     private void getListMangaFromRealtimeDatabase(){
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         myRef = firebaseDatabase.getReference("manga");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mlistManga.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Manga manga = dataSnapshot.getValue(Manga.class);
                     mlistManga.add(manga);
-                    Log.d("Tên:", manga.getTitle());
                 }
                 mangaAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //Toast.makeText(requireContext(),"Get list manga failed",Toast.LENGTH_SHORT).show();
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
     }
 }

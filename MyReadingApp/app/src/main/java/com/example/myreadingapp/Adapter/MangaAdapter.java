@@ -15,6 +15,7 @@ import com.example.myreadingapp.R;
 import java.util.List;
 
 import com.example.myreadingapp.Models.Manga;
+import com.squareup.picasso.Picasso;
 
 public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHolder>{
 
@@ -36,11 +37,11 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
         if (manga == null){
             return;
         }
-        if (manga.getResourceId() != 0) {
-            holder.imgPoster.setImageResource(manga.getResourceId());
+        if (manga.getImageUrl() != "") {
+            Picasso.get().load(manga.getImageUrl()).into(holder.imgPoster);
         }
         holder.tvTitle.setText(manga.getTitle());
-        holder.tvAuthor.setText(manga.getAuthor());
+        holder.tvAuthor.setText(manga.getAuthorId());
     }
 
     @Override

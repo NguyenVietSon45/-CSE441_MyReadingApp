@@ -1,25 +1,19 @@
 package com.example.myreadingapp.Models;
 
 public class Manga {
-    private int resourceId;
+    private String id;
     private String title;
-    private String author;
+    private String imageUrl;
+    private String authorId;
+    private String description;
+    private long created_at;
 
-    public Manga() {
+    public String getId() {
+        return id;
     }
 
-    public Manga(int resourceId, String title, String author) {
-        this.resourceId = resourceId;
-        this.title = title;
-        this.author = author;
-    }
-
-    public int getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -30,11 +24,47 @@ public class Manga {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public long getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(long created_at) {
+        this.created_at = created_at;
+    }
+
+    public Manga(String id, String title, String imageUrl, String authorId, String description, long created_at) {
+        this.id = id;
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.authorId = authorId;
+        this.description = description;
+        this.created_at = created_at;
+    }
+
+    public Manga() {
     }
 }

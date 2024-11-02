@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.myreadingapp.Adapter.CategoryAdapter;
 import com.example.myreadingapp.R;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import com.example.myreadingapp.Models.Category;
 import com.example.myreadingapp.Models.Manga;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,9 +87,10 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+//        Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_home, container, false);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -98,13 +101,11 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false);
         rcvCategory.setLayoutManager(linearLayoutManager);
 
-
         listManga = new ArrayList<>();
         listCategory = new ArrayList<>();
 
 //        categoryAdapter.setData(getListMangaFromRealtimeDatabase());
         rcvCategory.setAdapter(categoryAdapter);
-
 
         imgProfile = view.findViewById(R.id.profile_image);
         // Nhận URL avatar từ Intent
@@ -112,59 +113,31 @@ public class HomeFragment extends Fragment {
             String avatarUrl = getActivity().getIntent().getStringExtra("AVATAR_URL");
 //            loadAvatar(avatarUrl); // Tải avatar
         }
-        imgProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Xóa tất cả Activity phía trên
-                startActivity(intent);
-                getActivity().finish();
-                // Đóng MainActivity
-            }
+        imgProfile.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getActivity(), ProfileActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Xóa tất cả Activity phía trên
+            startActivity(intent);
+            getActivity().finish();
+            // Đóng MainActivity
         });
 
 
         return view;
     }
 
-    private void clickAddAllMangas(){
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("manga");
-
-        List<Manga> listManga = new ArrayList<>();
-        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author1"));
-        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author2"));
-
-        myRef.setValue(listManga, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                Toast.makeText(requireContext(), "Add all mangas success", Toast.LENGTH_SHORT).show();            }
-        });
-    }
-
-//    private List<Category> getListMangaFromRealtimeDatabase(){
+//    private void clickAddAllMangas(){
+//        // Write a message to the database
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("manga");
 //
-//        firebaseDatabase = FirebaseDatabase.getInstance();
-//        myRef = firebaseDatabase.getReference("manga");
+//        List<Manga> listManga = new ArrayList<>();
+//        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author1"));
+//        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author2"));
 //
-//        myRef.addValueEventListener(new ValueEventListener() {
+//        myRef.setValue(listManga, new DatabaseReference.CompletionListener() {
 //            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    Manga manga = dataSnapshot.getValue(Manga.class);
-//                    listManga.add(manga);
-//                    Log.d("Tên:", manga.getTitle());
-//                }
-//                categoryAdapter.notifyDataSetChanged();
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(requireContext(),"Get list manga failed",Toast.LENGTH_SHORT).show();
-//            }
+//            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+//                Toast.makeText(requireContext(), "Add all mangas success", Toast.LENGTH_SHORT).show();            }
 //        });
-//        return listCategory;
 //    }
 }
