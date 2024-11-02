@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"/>
+
+<!--    <FrameLayout-->
+<!--        android:id="@+id/frameLayout_register"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.077">-->
+
+<!--        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            android:id="@+id/profile_image"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:src="@drawable/baseline_account_circle_24"-->
+<!--            app:civ_border_color="#FF000000"-->
+<!--            app:civ_border_width="0dp"-->
+<!--            tools:layout_editor_absoluteX="256dp"-->
+<!--            tools:layout_editor_absoluteY="81dp" />-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_gravity="bottom|end"-->
+<!--            android:elevation="1dp"-->
+<!--            android:maxWidth="24dp"-->
+<!--            android:minWidth="10dp"-->
+<!--            android:src="@drawable/baseline_add_circle_24" />-->
+<!--    </FrameLayout>-->
+
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="48dp"
+        android:text="Please enter your information"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/edt_registerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter your name"
+            android:inputType="text"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="154dp"
+            tools:layout_editor_absoluteY="196dp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:id="@+id/edt_registerMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Write your email"
+            android:inputType="textEmailAddress"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="149dp"
+            tools:layout_editor_absoluteY="266dp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:id="@+id/edt_registerPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Make a password"
+            android:inputType="textPassword"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="146dp"
+            tools:layout_editor_absoluteY="355dp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:id="@+id/edt_registerConfirmPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Confirm password"
+            android:inputType="textPassword"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="441dp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="70dp" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="555dp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="60dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
