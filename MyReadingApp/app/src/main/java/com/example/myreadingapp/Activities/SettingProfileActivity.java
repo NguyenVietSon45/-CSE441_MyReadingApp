@@ -1,4 +1,4 @@
-package com.example.myreadingapplication.Activities;
+package com.example.myreadingapp.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.myreadingapplication.R;
 import com.squareup.picasso.Picasso;
 
-import Models.User;
+import com.example.myreadingapp.Models.User;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingProfileActivity extends AppCompatActivity {

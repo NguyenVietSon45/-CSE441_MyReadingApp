@@ -1,4 +1,4 @@
-package Models;
+package com.example.myreadingapp.Models;
 
 public class Manga {
     private int resourceId;

@@ -1,4 +1,4 @@
-package com.example.myreadingapplication.Adapter;
+package com.example.myreadingapp.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +14,7 @@ import com.example.myreadingapplication.R;
 
 import java.util.List;
 
-import Models.Manga;
+import com.example.myreadingapp.Models.Manga;
 
 public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHolder>{
 

@@ -1,4 +1,4 @@
-package Models;
+package com.example.myreadingapp.Models;
 
 import java.util.List;
 
