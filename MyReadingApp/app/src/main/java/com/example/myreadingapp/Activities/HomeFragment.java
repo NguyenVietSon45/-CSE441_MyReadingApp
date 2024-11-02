@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.myreadingapp.Adapter.CategoryAdapter;
-import com.example.myreadingapplication.R;
+import com.example.myreadingapp.R;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

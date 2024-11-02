@@ -10,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.myreadingapplication.R;
+import com.example.myreadingapp.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 

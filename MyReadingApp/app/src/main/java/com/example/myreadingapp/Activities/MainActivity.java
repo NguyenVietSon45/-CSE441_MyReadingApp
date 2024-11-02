@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.myreadingapplication.R;
-import com.example.myreadingapplication.databinding.ActivityMainBinding;
+import com.example.myreadingapp.R;
+import com.example.myreadingapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

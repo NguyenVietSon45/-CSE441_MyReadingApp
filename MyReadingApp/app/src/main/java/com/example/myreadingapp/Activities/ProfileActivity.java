@@ -21,8 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.myreadingapplication.R;
-import com.example.myreadingapplication.databinding.ActivityProfileBinding;
+import com.example.myreadingapp.R;
+import com.example.myreadingapp.databinding.ActivityProfileBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

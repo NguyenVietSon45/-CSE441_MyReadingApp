@@ -14,7 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.myreadingapplication.R;
+import com.example.myreadingapp.R;
 import com.squareup.picasso.Picasso;
 
 import com.example.myreadingapp.Models.User;
