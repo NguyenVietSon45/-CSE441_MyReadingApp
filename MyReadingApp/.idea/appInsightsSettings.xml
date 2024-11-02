@@ -8,8 +8,8 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.myreadingapplication" />
-                  <option name="mobileSdkAppId" value="1:317036739410:android:53eb95ae3ef050ea15988b" />
+                  <option name="appId" value="com.example.myreadingapp" />
+                  <option name="mobileSdkAppId" value="1:317036739410:android:65757938330567a915988b" />
                   <option name="projectId" value="myreadingapp-39e7b" />
                   <option name="projectNumber" value="317036739410" />
                 </ConnectionSetting>
