@@ -170,12 +170,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void logout() {
         // Xóa thông tin đăng nhập từ SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("email");
         editor.remove("id");
         editor.remove("password");
         editor.remove("username");
+        editor.remove("avt_url");
         editor.apply();
 
         // In ra thông báo để kiểm tra
