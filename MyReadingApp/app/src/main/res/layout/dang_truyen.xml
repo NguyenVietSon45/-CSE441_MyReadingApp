@@ -84,6 +84,15 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+<!--            <EditText-->
+<!--                android:id="@+id/edit_author"-->
+<!--                android:layout_width="350dp"-->
+<!--                android:layout_height="54dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:background="@drawable/edit_text"-->
+<!--                android:hint="Tên tác giả"-->
+<!--                android:padding="5dp" />-->
+
             <Spinner
                 android:id="@+id/spinner_author"
                 android:layout_width="250dp"

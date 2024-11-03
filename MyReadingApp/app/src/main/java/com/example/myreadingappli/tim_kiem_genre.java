@@ -49,7 +49,8 @@ public class tim_kiem_genre extends AppCompatActivity {
         UIcreated();
 
         // Thiết lập RecyclerView
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3,
+                GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         mangaList = new ArrayList<>();
         mangaAdapter = new SortedMangaAdapter(mangaList);

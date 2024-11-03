@@ -42,9 +42,10 @@ public class Dang_truyen extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
     private ImageView imgeUrl;
-    private EditText editTextTitle, editTextSummary;
+    private EditText editTextTitle,editTextAuthor, editTextSummary;
     private Button buttonSubmit;
     private String genreIDSelected;
+
     private DatabaseReference databaseReference;
 
     @Override
