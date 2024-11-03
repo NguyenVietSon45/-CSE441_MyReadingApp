@@ -6,9 +6,6 @@ public class Category {
     private String nameCategory;
     private List<Manga> mangas;
 
-    public Category() {
-    }
-
     public Category(String nameCategory, List<Manga> mangas) {
         this.nameCategory = nameCategory;
         this.mangas = mangas;
@@ -22,11 +19,12 @@ public class Category {
         this.nameCategory = nameCategory;
     }
 
-//    public List<Manga> getMangas() {
-//        return mangas;
-//    }
+    public List<Manga> getMangas() {
+        return mangas;
+    }
 
     public void setMangas(List<Manga> mangas) {
         this.mangas = mangas;
     }
 }
+

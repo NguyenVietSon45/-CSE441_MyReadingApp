@@ -101,8 +101,16 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false);
         rcvCategory.setLayoutManager(linearLayoutManager);
 
-        listManga = new ArrayList<>();
-        listCategory = new ArrayList<>();
+        listManga = new ArrayList<Manga>();
+        listCategory = new ArrayList<Category>();
+
+        fetchMangaData();
+
+        listCategory.add(new Category("Trending", listManga));
+        listCategory.add(new Category("Favorite", listManga));
+        listCategory.add(new Category("History", listManga));
+        listCategory.add(new Category("Category", listManga));
+        categoryAdapter.setData(listCategory);
 
 //        categoryAdapter.setData(getListMangaFromRealtimeDatabase());
         rcvCategory.setAdapter(categoryAdapter);
@@ -125,19 +133,29 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-//    private void clickAddAllMangas(){
-//        // Write a message to the database
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("manga");
-//
-//        List<Manga> listManga = new ArrayList<>();
-//        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author1"));
-//        listManga.add(new Manga(R.drawable.poster, "Moriaty: The Patriorty","Author2"));
-//
-//        myRef.setValue(listManga, new DatabaseReference.CompletionListener() {
-//            @Override
-//            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//                Toast.makeText(requireContext(), "Add all mangas success", Toast.LENGTH_SHORT).show();            }
-//        });
-//    }
+    //lấy dữ liệu manga từ Firebase và cập nhật danh sách manga
+    private void fetchMangaData() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = firebaseDatabase.getReference("manga"); //tham chiếu đến nút manga
+
+        //Lắng nghe sự thay đổi dữ liệu
+        myRef.addValueEventListener(new ValueEventListener() {
+            //xử lý dữ liệu khi có thay đổi
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listManga.clear(); //Xóa tất cả các phần tử trong danh sách listManga để chuẩn bị cập nhật với dữ liệu mới
+                //vòng lặp qua tất cả các con của snapshot (mỗi con là 1 manga)
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Manga manga = dataSnapshot.getValue(Manga.class);
+                    listManga.add(manga);
+                }
+                categoryAdapter.notifyDataSetChanged(); //Thông báo cho adapter rằng dữ liệu đã thay đổi
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

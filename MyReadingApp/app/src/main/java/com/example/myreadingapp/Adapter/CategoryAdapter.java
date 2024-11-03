@@ -1,6 +1,7 @@
 package com.example.myreadingapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myreadingapp.Activities.MangaInfoActivity;
 import com.example.myreadingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +34,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference myRef;
     private MangaAdapter mangaAdapter;
+
+    public interface OnCategoryListener{
+        void onCategoryClick(Manga manga);
+    }
 
     public CategoryAdapter(Context mcontext) {
         this.mcontext = mcontext;
@@ -61,10 +67,23 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.rcvManga.setLayoutManager(linearLayoutManager);
 
         mangaAdapter = new MangaAdapter();
-//        mangaAdapter.setData(category.getMangas());
-        holder.rcvManga.setAdapter(mangaAdapter);
 
-        getListMangaFromRealtimeDatabase();
+        mangaAdapter = new MangaAdapter();
+        mangaAdapter.setData(category.getMangas(), new OnCategoryListener(){
+            @Override
+            public void onCategoryClick(Manga manga) {
+                onDetailManga(manga);
+            }
+        });
+
+
+        holder.rcvManga.setAdapter(mangaAdapter);
+    }
+
+    private void onDetailManga(Manga manga) {
+        Intent intent = new Intent(mcontext, MangaInfoActivity.class);
+        intent.putExtra("MANGA_ID", manga.getId());
+        mcontext.startActivity(intent);
 
     }
 
@@ -87,23 +106,4 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
     }
 
-    private void getListMangaFromRealtimeDatabase(){
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = firebaseDatabase.getReference("manga");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mlistManga.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Manga manga = dataSnapshot.getValue(Manga.class);
-                    mlistManga.add(manga);
-                }
-                mangaAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
-    }
 }

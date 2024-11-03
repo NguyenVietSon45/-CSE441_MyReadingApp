@@ -2,6 +2,8 @@ package com.example.myreadingapp.Activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myreadingapp.Adapter.ChapterAdapter;
 import com.example.myreadingapp.Models.Chapter;
 import com.example.myreadingapp.Models.Manga;
@@ -31,9 +34,11 @@ import java.util.List;
 public class MangaInfoActivity extends AppCompatActivity {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app/");
-    private DatabaseReference mMangaRef = database.getReference("users");
+    //    private DatabaseReference mMangaRef = database.getReference("users");
     private DatabaseReference myChapterRef = database.getReference("chapters");
 
+    private ImageView img_back, img_coverManga;
+    private TextView tv_title, tv_author, tv_status, tv_description, tv_favorite;
 
     private RecyclerView rcvChapter;
     private ChapterAdapter mchapterAdapter;
@@ -55,12 +60,22 @@ public class MangaInfoActivity extends AppCompatActivity {
             return insets;
         });
 
-        initUi();
+        //lay du lieu tu id truyen
+        String mangaID = getIntent().getStringExtra("MANGA_ID");
 
-        manga_id = "-OAcCoaTjRmvRreR5KHk";
-//        getMangaById(manga_id);
+        if (mangaID != null) {
+            Log.d("TargetActivity", "Received Manga ID: " + mangaID);
+            // Use the mangaID as needed
+        } else {
+            Log.e("TargetActivity", "Manga ID not found in Intent");
+        }
+        getMangaById(mangaID);
 
-//        getListChapter();
+
+        img_back = findViewById(R.id.btn_back);
+        img_back.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     private void initUi(){
@@ -78,21 +93,40 @@ public class MangaInfoActivity extends AppCompatActivity {
         rcvChapter.setAdapter(mchapterAdapter);
     }
 
-    // tìm truyện theo id
+    // tim truyen theo id
     private void getMangaById(String mangaID) {
-        Log.d("DMMMMM2", mangaID);
-
-        mMangaRef.child("-OAafiSII85n1L0Czcn1").addValueEventListener(new ValueEventListener() {
+        DatabaseReference mangaRef = database.getReference("manga");
+        mangaRef.child(mangaID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User curManga = snapshot.getValue(User.class);
-                Log.d("DMMMMM3", "title");
+                Manga curManga = snapshot.getValue(Manga.class);
+                if (curManga != null) {
+                    Log.d("MangaInfoActivity", "Manga ID: " + curManga.getId());
+                    Log.d("MangaInfoActivity", "Manga title: " + curManga.getTitle());
+
+                    // Update UI components (thanh phan giao dien ng dung) voi details cua manga
+                    tv_title = findViewById(R.id.tv_manga_title);
+                    tv_title.setText(curManga.getTitle());
+
+                    img_coverManga = findViewById(R.id.iv_manga_cover);
+                    Glide.with(MangaInfoActivity.this).load(curManga.getImageUrl()).into(img_coverManga);
+
+                    tv_author = findViewById(R.id.tv_author);
+                    tv_author.setText(curManga.getAuthorId());
+
+                    tv_description = findViewById(R.id.tv_description);
+                    tv_description.setText(curManga.getDescription());
+
+                } else {
+                    Log.d("MangaInfoActivity", "Manga not found");
+                }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("MangaInfoActivity", "Failed to fetch manga", error.toException());
+            }
         });
-        Log.d("DMMMMM4", "title");
     }
 
     private void getListChapter(){
@@ -113,4 +147,5 @@ public class MangaInfoActivity extends AppCompatActivity {
             }
         });
     }
+
 }
