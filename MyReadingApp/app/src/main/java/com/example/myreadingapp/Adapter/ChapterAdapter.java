@@ -12,6 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder>{
 
@@ -35,7 +40,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
             return;
         }
         holder.tv_chapter.setText("Chapter " + chapter.getOrder());
-        holder.tv_date.setText(chapter.getCreated_at().toString());
+        holder.tv_date.setText(convertLongToDate(chapter.getCreated_at()));
     }
 
     @Override
@@ -55,5 +60,17 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
             tv_chapter = itemView.findViewById(R.id.chapter_tv);
             tv_date = itemView.findViewById(R.id.date_tv);
         }
+    }
+    public String convertLongToDate(Long timestamp) {
+        // Kiểm tra nếu timestamp không null
+        if (timestamp == null) {
+            return "N/A"; // Hoặc giá trị mặc định nào đó
+        }
+        // Tạo đối tượng Date từ timestamp
+        Date date = new Date(timestamp);
+        // Định dạng ngày tháng
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        // Trả về chuỗi đã định dạng
+        return sdf.format(date);
     }
 }

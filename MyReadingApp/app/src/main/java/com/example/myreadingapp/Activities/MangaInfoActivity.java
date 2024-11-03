@@ -1,7 +1,10 @@
 package com.example.myreadingapp.Activities;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -9,6 +12,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -38,16 +42,15 @@ public class MangaInfoActivity extends AppCompatActivity {
     private DatabaseReference myChapterRef = database.getReference("chapters");
 
     private ImageView img_back, img_coverManga;
-    private TextView tv_title, tv_author, tv_status, tv_description, tv_favorite;
+    private TextView tv_title, tv_author, tv_status, tv_description;
+    private ImageButton btnFavor;
 
     private RecyclerView rcvChapter;
     private ChapterAdapter mchapterAdapter;
     private List<Chapter> mListChapter;
 
-    private Manga currentManga;
-    private String user_id = "";
-    String manga_id = "";
-    private String id_favorite = "";
+    private boolean isFavorite = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,14 @@ public class MangaInfoActivity extends AppCompatActivity {
         }
         getMangaById(mangaID);
 
+        initUi();
 
+        btnFavor = findViewById(R.id.btn_favor);
+        btnFavor.setOnClickListener(v -> {
+            //setFavorite();
+            isFavorite = !isFavorite;
+            setFavoriteBtn();
+        });
         img_back = findViewById(R.id.btn_back);
         img_back.setOnClickListener(v -> {
             finish();
@@ -91,6 +101,14 @@ public class MangaInfoActivity extends AppCompatActivity {
         mchapterAdapter = new ChapterAdapter(mListChapter);
 
         rcvChapter.setAdapter(mchapterAdapter);
+    }
+
+    private void setFavoriteBtn() {
+        if (isFavorite) {
+            btnFavor.setColorFilter(ContextCompat.getColor(this, R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+        } else {
+            btnFavor.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+        }
     }
 
     // tim truyen theo id
@@ -117,6 +135,7 @@ public class MangaInfoActivity extends AppCompatActivity {
                     tv_description = findViewById(R.id.tv_description);
                     tv_description.setText(curManga.getDescription());
 
+                    getListChapter(curManga.getId());
                 } else {
                     Log.d("MangaInfoActivity", "Manga not found");
                 }
@@ -129,14 +148,21 @@ public class MangaInfoActivity extends AppCompatActivity {
         });
     }
 
-    private void getListChapter(){
-        myChapterRef.addValueEventListener(new ValueEventListener() {
+    //lấy list chapter theo id cua manga
+    private void getListChapter(String mangaId) {
+        DatabaseReference myChapterRef = database.getReference("chapters");
+        myChapterRef.orderByChild("manga_id").equalTo(mangaId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                mListChapter.clear();  // Xóa danh sách cũ trước khi thêm mới
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Chapter chapter = dataSnapshot.getValue(Chapter.class);
-                    mListChapter.add(chapter);
-                    Log.d("Chapter: ", chapter.getId());
+                    if (chapter != null) {
+                        mListChapter.add(chapter);
+                        Log.d("MangaInfoActivity","Chapter: " + chapter.getId());
+                        Log.d("MangaInfo", "Oder: " + chapter.getOrder());
+                    }
                 }
                 mchapterAdapter.notifyDataSetChanged();
             }
