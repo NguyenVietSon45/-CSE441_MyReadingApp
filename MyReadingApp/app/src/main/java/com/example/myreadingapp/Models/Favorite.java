@@ -2,13 +2,13 @@ package com.example.myreadingapp.Models;
 
 public class Favorite {
     private String id;
-    private String comic_id;
+    private String manga_id;
     private String user_id;
     private long created_at;
 
-    public Favorite(String id, String comic_id, String user_id, long created_at) {
+    public Favorite(String id, String manga_id, String user_id, long created_at) {
         this.id = id;
-        this.comic_id = comic_id;
+        this.manga_id = manga_id;
         this.user_id = user_id;
         this.created_at = created_at;
     }
@@ -25,12 +25,12 @@ public class Favorite {
         this.id = id;
     }
 
-    public String getComic_id() {
-        return comic_id;
+    public String getManga_id() {
+        return manga_id;
     }
 
-    public void setComic_id(String comic_id) {
-        this.comic_id = comic_id;
+    public void setManga_id(String manga_id) {
+        this.manga_id = manga_id;
     }
 
     public String getUser_id() {

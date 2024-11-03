@@ -1,5 +1,6 @@
 package com.example.myreadingapp.Activities;
 
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myreadingapp.Adapter.ChapterAdapter;
 import com.example.myreadingapp.Models.Chapter;
+import com.example.myreadingapp.Models.Favorite;
 import com.example.myreadingapp.Models.Manga;
 import com.example.myreadingapp.Models.User;
 import com.example.myreadingapp.R;
@@ -50,6 +52,8 @@ public class MangaInfoActivity extends AppCompatActivity {
     private List<Chapter> mListChapter;
 
     private boolean isFavorite = false;
+    private String currentUserId;
+
 
 
     @Override
@@ -63,30 +67,59 @@ public class MangaInfoActivity extends AppCompatActivity {
             return insets;
         });
 
-        //lay du lieu tu id truyen
-        String mangaID = getIntent().getStringExtra("MANGA_ID");
+        // Lấy ID người dùng từ SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        currentUserId = sharedPreferences.getString("id", null); // Lấy ID người dùng
+        Log.d("MangaInfo", "currentUser:" + currentUserId);
 
-        if (mangaID != null) {
-            Log.d("TargetActivity", "Received Manga ID: " + mangaID);
+        //lay du lieu tu id truyen
+        String currentMangaID = getIntent().getStringExtra("MANGA_ID");
+
+        if (currentMangaID != null) {
+            Log.d("TargetActivity", "Received Manga ID: " + currentMangaID);
             // Use the mangaID as needed
         } else {
             Log.e("TargetActivity", "Manga ID not found in Intent");
         }
-        getMangaById(mangaID);
+        getMangaById(currentMangaID);
 
         initUi();
 
         btnFavor = findViewById(R.id.btn_favor);
         btnFavor.setOnClickListener(v -> {
-            //setFavorite();
-            isFavorite = !isFavorite;
-            setFavoriteBtn();
+            isFavorite = !isFavorite; // Đổi trạng thái yêu thích
+            setFavoriteBtn(); // Cập nhật màu nút
+            if (isFavorite) {
+                addMangaToFavorites(currentMangaID); // Thêm manga vào danh sách yêu thích
+            } else {
+                removeMangaFromFavorites(currentMangaID); // Xóa manga khỏi danh sách yêu thích nếu cần
+            }
         });
         img_back = findViewById(R.id.btn_back);
         img_back.setOnClickListener(v -> {
             finish();
         });
     }
+
+    private void addMangaToFavorites(String currentMangaID) {
+        String favoriteID = myChapterRef.push().getKey(); // Tạo một ID duy nhất cho favorite
+        long currentTime = System.currentTimeMillis(); // Thời gian hiện tại
+
+        Favorite favorite = new Favorite(favoriteID, currentMangaID, currentUserId, currentTime);
+
+        DatabaseReference favoritesRef = database.getReference("favorites");
+        favoritesRef.child(favoriteID).setValue(favorite)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(MangaInfoActivity.this, "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(MangaInfoActivity.this, "Không thể thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void removeMangaFromFavorites(String currentMangaID) {
+    }
+
 
     private void initUi(){
         rcvChapter = findViewById(R.id.rcv_chapter);
