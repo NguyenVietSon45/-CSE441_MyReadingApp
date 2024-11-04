@@ -1,7 +1,7 @@
 package com.example.myreadingapp.Models;
 
 public class Chapter {
-    private Long created_at;
+    private long created_at;
     private String id;
     private String manga_id;
     private int order;
@@ -10,7 +10,7 @@ public class Chapter {
     public Chapter() {
     }
 
-    public Chapter(Long created_at, String id, String manga_id, int order, String pdf_url) {
+    public Chapter(long created_at, String id, String manga_id, int order, String pdf_url) {
         this.created_at = created_at;
         this.id = id;
         this.manga_id = manga_id;
@@ -18,11 +18,11 @@ public class Chapter {
         this.pdf_url = pdf_url;
     }
 
-    public Long getCreated_at() {
+    public long getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Long created_at) {
+    public void setCreated_at(long created_at) {
         this.created_at = created_at;
     }
 
