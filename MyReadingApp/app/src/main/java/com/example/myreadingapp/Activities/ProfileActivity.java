@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.example.myreadingapp.R;
 import com.example.myreadingapp.databinding.ActivityProfileBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -149,11 +150,16 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot == null) return;
                 User curUser = snapshot.getValue(User.class);
-                if (curUser.getAvt_url().equals("")) {
-                    imgProfile.setImageResource(R.drawable.none_avatar);
-                } else {
-                    Picasso.get().load(curUser.getAvt_url()).into(imgProfile);
-                }
+//                if (curUser.getAvt_url().equals("")) {
+//                    imgProfile.setImageResource(R.drawable.none_avatar);
+//                } else {
+//                    Picasso.get().load(curUser.getAvt_url()).into(imgProfile);
+//                }
+                Glide.with(ProfileActivity.this)
+                        .load(curUser.getAvt_url())
+                        .placeholder(R.drawable.none_avatar) // placeholder image
+                        .error(R.drawable.none_avatar) // error image
+                        .into(imgProfile);
             }
 
             @Override
