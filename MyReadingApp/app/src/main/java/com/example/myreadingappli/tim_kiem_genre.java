@@ -1,5 +1,6 @@
 package com.example.myreadingappli;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -47,6 +48,12 @@ public class tim_kiem_genre extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tim_kiem_genre);
         UIcreated();
+        ImageView imageViewBack = findViewById(R.id.back_btn);
+        imageViewBack.setOnClickListener(v -> {
+            Intent intent = new Intent(tim_kiem_genre.this, Chapter_notify.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
 
         // Thiết lập RecyclerView
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3,
@@ -198,19 +205,7 @@ public class tim_kiem_genre extends AppCompatActivity {
         });
     }
 
-//    private void filterMangaList(String query) {
-//        List<Manga> filteredList = new ArrayList<>();
-//        for (Manga manga : mangaList) {
-//            if (manga.getTitle().toLowerCase().contains(query.toLowerCase())) {
-//                filteredList.add(manga);
-//            }
-//        }
-//
-//        mangaAdapter.updateList(filteredList); // Cập nhật adapter với danh sách đã lọc
-//        if (filteredList.isEmpty()) {
-//            Toast.makeText(this, "Không tìm thấy kết quả nào.", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+
 
     private void searchMangaByTitle(String query) {
         DatabaseReference mangaRef = FirebaseDatabase.getInstance().getReference("manga");

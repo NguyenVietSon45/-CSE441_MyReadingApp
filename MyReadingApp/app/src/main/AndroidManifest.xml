@@ -16,19 +16,22 @@
         android:theme="@style/Theme.MyReadingApp"
         tools:targetApi="31">
         <activity
+            android:name=".Chapter_notify"
+            android:exported="false" />
+        <activity
             android:name=".tim_kiem_genre"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".Dang_chuong"
-            android:exported="false" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            android:exported="false">
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-        <!-- <activity -->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity> <!-- <activity -->
         <!-- android:name=".Adapters.GenreAdapter" -->
         <!-- android:exported="false" /> -->
         <!-- <activity -->
@@ -48,7 +51,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
