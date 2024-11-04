@@ -17,7 +17,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myreadingapp.Adapter.MangaAdapter;
+import com.example.myreadingapp.Adapter.MangaViewAdapter;
 import com.example.myreadingapp.Models.Chapter;
 import com.example.myreadingapp.Models.Manga;
 import com.example.myreadingapp.R;
@@ -42,7 +42,7 @@ public class Dang_chuong extends AppCompatActivity {
     private Uri pdfUri;
     private Button btn_upload;
     private String pdfFileName; // Biến lưu tên file PDF
-    private String chapterTitle; // Biến lưu tiêu đề chương
+    private String id;
     private String mangaId; // Biến lưu ID của manga
     private static final int PICK_PDF_REQUEST = 1;
 
@@ -100,7 +100,7 @@ public class Dang_chuong extends AppCompatActivity {
                 if (mangaList.isEmpty()) {
                     Toast.makeText(Dang_chuong.this, "Không có truyện nào để hiển thị", Toast.LENGTH_SHORT).show();
                 } else {
-                    MangaAdapter adapter = new MangaAdapter(Dang_chuong.this, mangaList);
+                    MangaViewAdapter adapter = new MangaViewAdapter(Dang_chuong.this, mangaList);
                     spn_title.setAdapter(adapter);
 
                     spn_title.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -182,7 +182,7 @@ public class Dang_chuong extends AppCompatActivity {
     }
 
     private void saveChapter(String pdfUrlString, int order) {
-        Chapter newChapter = new Chapter(chapterTitle, null, mangaId, order, pdfUrlString, System.currentTimeMillis());
+        Chapter newChapter = new Chapter( System.currentTimeMillis(),id, mangaId, order, pdfUrlString);
         DatabaseReference chaptersRef = FirebaseDatabase.getInstance().getReference("chapters");
         String chapterId = chaptersRef.push().getKey();
         newChapter.setId(chapterId); // Nếu bạn có phương thức setId
