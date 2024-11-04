@@ -1,5 +1,8 @@
 package com.example.myreadingapp.Activities;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,7 +53,9 @@ public class FavoriteFragment extends Fragment {
         database = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
 
         // Start listening for real-time updates
-        listenForFavoriteMangaUpdates("-OAafiSII85n1L0Czcn1"); // Replace "userIdPlaceholder" with the actual user ID logic
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String user_id = sharedPreferences.getString("id", "");
+        listenForFavoriteMangaUpdates(user_id);
 
         return view;
     }

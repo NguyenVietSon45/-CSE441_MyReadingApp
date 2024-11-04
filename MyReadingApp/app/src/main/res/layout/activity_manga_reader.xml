@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- PDF Viewer -->
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
@@ -14,7 +13,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <!-- Top LinearLayout with Back Button and Chapter Controls -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -26,22 +24,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Back Button -->
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="20sp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="#EBEDEDED"
             android:contentDescription="@string/back_button"
             android:src="@drawable/arrow_back" />
 
-        <!-- Previous Chapter Button -->
         <ImageButton
             android:id="@+id/btnPrevious"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="#EBEDEDED"
             android:contentDescription="@string/previous_chapter"
             android:paddingEnd="10dp"
             android:src="@drawable/arrow_left" />
@@ -61,7 +57,6 @@
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
-            <!-- Chapter Spinner (dropdown) -->
             <Spinner
                 android:id="@+id/spinnerChapter"
                 android:layout_width="wrap_content"
@@ -69,12 +64,11 @@
                 android:textAlignment="center" />
         </LinearLayout>
 
-        <!-- Next Chapter Button -->
         <ImageButton
             android:id="@+id/btnNext"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="#EBEDEDED"
             android:contentDescription="@string/next_chapter"
             android:paddingStart="10dp"
             android:src="@drawable/arrow_right" />

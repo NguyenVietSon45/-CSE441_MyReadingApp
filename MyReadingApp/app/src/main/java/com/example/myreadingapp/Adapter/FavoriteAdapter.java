@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.myreadingapp.Activities.MangaInfoActivity;
 import com.example.myreadingapp.Models.Chapter;
 import com.example.myreadingapp.Models.Favorite;
 import com.example.myreadingapp.Activities.MangaReaderActivity;
@@ -85,9 +86,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MangaV
                 holder.btnRead.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(mContext, MangaReaderActivity.class);
+                        Intent intent = new Intent(mContext, MangaInfoActivity.class);
                         // Pass the manga ID or other necessary data
-                        intent.putExtra("manga_id", favorite.getManga_id());
+                        intent.putExtra("MANGA_ID", favorite.getManga_id());
                         mContext.startActivity(intent);
                     }
                 });

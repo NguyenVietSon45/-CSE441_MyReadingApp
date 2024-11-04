@@ -182,7 +182,7 @@ public class Dang_chuong extends AppCompatActivity {
     }
 
     private void saveChapter(String pdfUrlString, int order) {
-        Chapter newChapter = new Chapter( System.currentTimeMillis(),id, mangaId, order, pdfUrlString);
+        Chapter newChapter = new Chapter(id, mangaId, order, pdfUrlString, System.currentTimeMillis());
         DatabaseReference chaptersRef = FirebaseDatabase.getInstance().getReference("chapters");
         String chapterId = chaptersRef.push().getKey();
         newChapter.setId(chapterId); // Nếu bạn có phương thức setId

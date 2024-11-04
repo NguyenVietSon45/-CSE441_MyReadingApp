@@ -55,7 +55,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MangaVie
                     return date2.compareTo(date1);
                 } catch (ParseException e) {
                     Log.e("DateSortError", "Error parsing date", e);
-                    return 0; // Treat dates that fail parsing as equal
+                    return 0;
                 }
             });
         }
@@ -132,19 +132,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MangaVie
 
         // Display the last read date
         try {
-            // Parse the full timestamp (e.g., "2024-11-04 14:30:00")
             SimpleDateFormat fullFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
             Date date = fullFormat.parse(history.getLast_date());
 
-            // Format it to only display the date (e.g., "2024-11-04")
             SimpleDateFormat dateOnlyFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String dateOnly = dateOnlyFormat.format(date);
 
-            // Set the formatted date in the TextView
             holder.tvLastDate.setText("Last read: " + dateOnly);
         } catch (ParseException e) {
             Log.e("DateParseError", "Error parsing date", e);
-            // Optionally, set a fallback or the original date if parsing fails
             holder.tvLastDate.setText("Last read: " + history.getLast_date());
         }
 

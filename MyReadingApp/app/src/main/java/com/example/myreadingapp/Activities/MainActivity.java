@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.action_home) {
                 replaceFragment(new HomeFragment());
             } else if (item.getItemId() == R.id.action_archive) {
-                replaceFragment(new ArchieveFragment());
+                replaceFragment(new MangaLibraryFragment());
             } else if (item.getItemId() == R.id.action_notice) {
                 replaceFragment(new NoticeFragment());
             }

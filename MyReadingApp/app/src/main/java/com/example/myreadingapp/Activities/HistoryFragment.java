@@ -1,5 +1,8 @@
 package com.example.myreadingapp.Activities;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -45,7 +48,10 @@ public class HistoryFragment extends Fragment {
 
         // Initialize the database reference
         database = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
-        listenForHistoryUpdates("-OAafiSII85n1L0Czcn1"); // Replace with actual user ID logic
+
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String user_id = sharedPreferences.getString("id", ""); // Replace "" with a default value if not found
+        listenForHistoryUpdates(user_id);
 
         return view;
     }
