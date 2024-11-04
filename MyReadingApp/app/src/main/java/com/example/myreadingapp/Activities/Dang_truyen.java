@@ -71,7 +71,6 @@ public class Dang_truyen extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Genre selectedGenre = (Genre) parent.getItemAtPosition(position);
-                Toast.makeText(Dang_truyen.this, "Chọn thể loại: " + selectedGenre.getId()+selectedGenre.getName(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
