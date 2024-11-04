@@ -1,6 +1,7 @@
 package com.example.myreadingapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myreadingapp.Activities.MangaInfoActivity;
 import com.example.myreadingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,17 +25,19 @@ import java.util.List;
 import com.example.myreadingapp.Models.Category;
 import com.example.myreadingapp.Models.Manga;
 
-
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>{
 
     private Context mcontext;
     private List<Category> mListCategory;
     private List<Manga> mlistManga;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference myRef;
     private MangaAdapter mangaAdapter;
-    // truyền hết các list vào đây từ Home:
-    // truyền từng list vào các adapter con
+
+    public interface OnCategoryListener{
+        void onCategoryClick(Manga manga);
+    }
 
     public CategoryAdapter(Context mcontext) {
         this.mcontext = mcontext;
@@ -43,6 +47,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         this.mListCategory = list;
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -62,10 +67,24 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.rcvManga.setLayoutManager(linearLayoutManager);
 
         mangaAdapter = new MangaAdapter();
-//        mangaAdapter.setData(category.getMangas());
-        holder.rcvManga.setAdapter(mangaAdapter);
 
-        getListMangaFromRealtimeDatabase();
+        mangaAdapter = new MangaAdapter();
+        mangaAdapter.setData(category.getMangas(), new OnCategoryListener(){
+            @Override
+            public void onCategoryClick(Manga manga) {
+                onDetailManga(manga);
+            }
+        });
+
+
+        holder.rcvManga.setAdapter(mangaAdapter);
+    }
+
+    private void onDetailManga(Manga manga) {
+        Intent intent = new Intent(mcontext, MangaInfoActivity.class);
+        intent.putExtra("MANGA_ID", manga.getId());
+        mcontext.startActivity(intent);
+
     }
 
     @Override
@@ -77,36 +96,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
-
         private TextView tvNameCategory;
         private RecyclerView rcvManga;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNameCategory = itemView.findViewById(R.id.tv_name_category);
-            rcvManga = itemView.findViewById(R.id.rcv_manga);        }
+            rcvManga = itemView.findViewById(R.id.rcv_manga);
+        }
     }
 
-    private void getListMangaFromRealtimeDatabase(){
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = firebaseDatabase.getReference("manga");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Manga manga = dataSnapshot.getValue(Manga.class);
-                    mlistManga.add(manga);
-                    Log.d("Tên:", manga.getTitle());
-                }
-                mangaAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //Toast.makeText(requireContext(),"Get list manga failed",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }

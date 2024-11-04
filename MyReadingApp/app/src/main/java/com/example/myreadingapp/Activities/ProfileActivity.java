@@ -30,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import com.example.myreadingapp.Models.User;
+import com.squareup.picasso.Picasso;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -145,13 +147,12 @@ public class ProfileActivity extends AppCompatActivity {
         databaseRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot == null) return;
                 User curUser = snapshot.getValue(User.class);
                 if (curUser.getAvt_url().equals("")) {
                     imgProfile.setImageResource(R.drawable.none_avatar);
-
-                }
-                else {
-                    Log.d("avt_profile_actDMMMMMMM", curUser.getAvt_url());
+                } else {
+                    Picasso.get().load(curUser.getAvt_url()).into(imgProfile);
                 }
             }
 
@@ -169,12 +170,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void logout() {
         // Xóa thông tin đăng nhập từ SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("email");
         editor.remove("id");
         editor.remove("password");
         editor.remove("username");
+        editor.remove("avt_url");
         editor.apply();
 
         // In ra thông báo để kiểm tra

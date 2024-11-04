@@ -131,7 +131,6 @@ public class LoginActivity extends AppCompatActivity {
                     //Objects.requireNonNull() đảm bảo rằng snapshot.getKey() không trả về null trước khi sử dụng nó.
                     //Sau đó, chúng ta sử dụng child(snapshot.getKey()) để truy cập vào nút người dùng dựa trên ID.
 
-
                     // print the values for debugging
                     System.out.println("passwordFromDB: " + passwordFromDB);
                     System.out.println("password: " + password);
