@@ -208,7 +208,7 @@ public class HomeFragment extends Fragment {
 
     public void getHistoryList(String userId) {
         DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("history");
-        DatabaseReference mangaRef = FirebaseDatabase.getInstance().getReference("mangas"); // Reference to your manga data
+        DatabaseReference mangaRef = FirebaseDatabase.getInstance().getReference("mangas");
 
         historyRef.orderByChild("user_id").equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -217,7 +217,7 @@ public class HomeFragment extends Fragment {
                 int totalItems = (int) dataSnapshot.getChildrenCount(); // Total number of manga entries to process
 
                 if (totalItems == 0) {
-                    // If there are no items, update the list and exit early
+                    //Neu khong co item nao, update list va exit
                     listHisManga.clear();
                     listHisManga.addAll(tempList);
                     categoryAdapter.notifyDataSetChanged();
