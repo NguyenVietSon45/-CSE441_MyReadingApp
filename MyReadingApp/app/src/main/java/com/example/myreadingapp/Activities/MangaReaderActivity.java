@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -194,14 +195,39 @@ public class MangaReaderActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DataSnapshot matchingEntry = null;
+                List<DataSnapshot> historyEntries = new ArrayList<>();
 
-                // Iterate over all entries to find one with the same user_id and manga_id
+                // Collect all history entries for the user
                 for (DataSnapshot historySnapshot : snapshot.getChildren()) {
                     History history = historySnapshot.getValue(History.class);
-                    if (history != null && history.getManga_id().equals(mangaId)) {
-                        matchingEntry = historySnapshot;
-                        break; // Stop searching once a match is found
+                    if (history != null) {
+                        historyEntries.add(historySnapshot);
+                        if (history.getManga_id().equals(mangaId)) {
+                            matchingEntry = historySnapshot;
+                        }
                     }
+                }
+
+                // If more than 5 entries exist, remove the oldest one
+                if (historyEntries.size() >= 5) {
+                    // Sort entries by last_date (oldest first)
+                    historyEntries.sort((h1, h2) -> {
+                        try {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                            Date date1 = dateFormat.parse(h1.getValue(History.class).getLast_date());
+                            Date date2 = dateFormat.parse(h2.getValue(History.class).getLast_date());
+                            return date1.compareTo(date2);
+                        } catch (ParseException e) {
+                            Log.e("DateSortError", "Error parsing date", e);
+                            return 0;
+                        }
+                    });
+
+                    // Remove the oldest entry
+                    DataSnapshot oldestEntry = historyEntries.get(0);
+                    oldestEntry.getRef().removeValue()
+                            .addOnSuccessListener(aVoid -> Log.d("History", "Oldest entry removed"))
+                            .addOnFailureListener(e -> Log.e("History", "Failed to remove oldest entry", e));
                 }
 
                 if (matchingEntry != null) {
@@ -211,17 +237,12 @@ public class MangaReaderActivity extends AppCompatActivity {
                     updates.put("last_date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
 
                     matchingEntry.getRef().updateChildren(updates)
-                            .addOnSuccessListener(aVoid -> {
-                                Log.d("History", "Existing entry updated successfully");
-                            })
-                            .addOnFailureListener(e -> {
-                                Log.e("History", "Error updating the existing entry: " + e.getMessage());
-                            });
+                            .addOnSuccessListener(aVoid -> Log.d("History", "Existing entry updated successfully"))
+                            .addOnFailureListener(e -> Log.e("History", "Error updating the existing entry: " + e.getMessage()));
                 } else {
-                    // Add new history entry if no matching entry is found
+                    // Add a new history entry if no matching entry is found
                     addNewHistoryEntry(chapterId, mangaId);
                 }
-
             }
 
             @Override
@@ -232,17 +253,16 @@ public class MangaReaderActivity extends AppCompatActivity {
     }
 
     private void addNewHistoryEntry(String chapterId, String mangaId) {
-        String historyId = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("history").push().getKey();
+        String historyId = historyRef.push().getKey();
         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-        History history = new History(historyId, userId, mangaId, chapterId, currentDate); // mangaId is NOT directly stored here.
+        History history = new History(historyId, userId, mangaId, chapterId, currentDate);
         if (historyId != null) {
-            FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("history").child(historyId).setValue(history).addOnSuccessListener(aVoid -> {
-                Toast.makeText(this, "History updated", Toast.LENGTH_SHORT).show();
-            }).addOnFailureListener(e -> {
-                Toast.makeText(this, "Failed to update history", Toast.LENGTH_SHORT).show();
-            });
+            historyRef.child(historyId).setValue(history);
+//                    .addOnSuccessListener(aVoid -> Toast.makeText(this, "History updated", Toast.LENGTH_SHORT).show())
+//                    .addOnFailureListener(e -> Toast.makeText(this, "Failed to update history", Toast.LENGTH_SHORT).show());
         }
     }
+
 }
 
 
