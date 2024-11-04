@@ -1,6 +1,10 @@
 package com.example.myreadingapp.Activities;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +19,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.myreadingapp.Adapter.CategoryAdapter;
+import com.example.myreadingapp.Models.User;
 import com.example.myreadingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,12 +42,14 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class HomeFragment extends Fragment {
 
+    private Context mBase;
     private RecyclerView rcvCategory;
     private CategoryAdapter categoryAdapter;
     private ImageView imgProfile;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference myRef;
+
     private List<Manga> listManga;
     private List<Category> listCategory;
 
@@ -129,8 +137,40 @@ public class HomeFragment extends Fragment {
             // Đóng MainActivity
         });
 
+        // Lấy avt_url người dùng từ SharedPreferences
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String id = sharedPreferences.getString("id", ""); // Lấy id người dùng
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = firebaseDatabase.getReference("users");
+        // Lấy dữ liệu từ Firebase Realtime Database
+        myRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot == null) return;
+                User curUser = snapshot.getValue(User.class);
+                Glide.with(requireContext())
+                        .load(curUser.getAvt_url())
+                        .placeholder(R.drawable.none_avatar) // placeholder image
+                        .error(R.drawable.none_avatar) // error image
+                        .into(imgProfile);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    public SharedPreferences getSharedPreferences(String name, int mode) {
+        return mBase.getSharedPreferences(name, mode);
     }
 
     //lấy dữ liệu manga từ Firebase và cập nhật danh sách manga

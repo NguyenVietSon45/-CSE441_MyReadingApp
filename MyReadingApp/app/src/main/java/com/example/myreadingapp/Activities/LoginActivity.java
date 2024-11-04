@@ -77,6 +77,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        checkLoginStatus();
+    }
+
+    // Kiểm tra trạng thái đăng nhập
+    private void checkLoginStatus() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        if (isLoggedIn == true) {
+            // Nếu đã đăng nhập, mở MainActivity
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish(); // Kết thúc LoginActivity
+        }
     }
 
     //kiem tra email empty
@@ -147,6 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("id", id); // Lưu ID vào SharedPreferences
                         editor.putString("avt_url", avatarUrl); // Lưu avt vào SharedPreferences
+                        editor.putBoolean("isLoggedIn", true); // Lưu trạng thái đăng nhập
                         editor.apply(); // Lưu thay đổi
 
                         // Mở MainActivity và điều hướng đến HomeFragment

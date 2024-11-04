@@ -121,6 +121,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btn_start_reading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/cardview_dark_background"
@@ -128,6 +129,7 @@
                     android:textColor="@android:color/white" />
 
                 <Button
+                    android:id="@+id/btn_continue_reading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"

@@ -1,5 +1,7 @@
 package com.example.myreadingapp.Activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.example.myreadingapp.Adapter.ChapterAdapter;
 import com.example.myreadingapp.Models.Chapter;
 import com.example.myreadingapp.Models.Favorite;
+import com.example.myreadingapp.Models.History;
 import com.example.myreadingapp.Models.Manga;
 import com.example.myreadingapp.Models.User;
 import com.example.myreadingapp.R;
@@ -42,10 +45,11 @@ public class MangaInfoActivity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app/");
     //    private DatabaseReference mMangaRef = database.getReference("users");
     private DatabaseReference myChapterRef = database.getReference("chapters");
-
+    private Context mContext;
     private ImageView img_back, img_coverManga;
     private TextView tv_title, tv_author, tv_status, tv_description;
     private ImageButton btnFavor;
+    private Button  btnStart, btnContinue;
 
     private RecyclerView rcvChapter;
     private ChapterAdapter mchapterAdapter;
@@ -66,6 +70,8 @@ public class MangaInfoActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
 
         // Lấy ID người dùng từ SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -99,6 +105,29 @@ public class MangaInfoActivity extends AppCompatActivity {
         img_back.setOnClickListener(v -> {
             finish();
         });
+
+        btnStart = findViewById(R.id.btn_start_reading);
+        btnStart.setOnClickListener(v -> {
+            if (!mListChapter.isEmpty()) {
+                Chapter firstChapter = mListChapter.get(0); // Lấy chương đầu tiên
+                Log.d("MangaInfo", "id chap 1:" + firstChapter);
+                String chapterID = firstChapter.getId(); // Lấy ID của chương
+                Intent intent = new Intent(MangaInfoActivity.this, MangaReaderActivity.class); // Chuyển đến Activity đọc chương
+                intent.putExtra("chapter_id", chapterID); // Gửi ID chương
+                intent.putExtra("manga_id", currentMangaID); // Gửi ID manga
+                startActivity(intent); // Khởi động Activity mới
+            } else {
+                Toast.makeText(MangaInfoActivity.this, "Chưa có chương nào để đọc", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnContinue = findViewById(R.id.btn_continue_reading);
+        btnContinue.setOnClickListener(v ->{
+            History history = new History();
+            Intent intent = new Intent(mContext, MangaReaderActivity.class);
+            intent.putExtra("chapter_id", history.getChapter_id());
+            intent.putExtra("manga_id", history.getManga_id());
+            mContext.startActivity(intent);        });
     }
 
     private void addMangaToFavorites(String currentMangaID) {
@@ -225,6 +254,10 @@ public class MangaInfoActivity extends AppCompatActivity {
                         Log.d("MangaInfo", "Oder: " + chapter.getOrder());
                     }
                 }
+
+                // Sắp xếp mListChapter
+                mListChapter.sort((chapter1, chapter2) -> Integer.compare(chapter1.getOrder(), chapter2.getOrder()));
+
                 mchapterAdapter.notifyDataSetChanged();
             }
 
