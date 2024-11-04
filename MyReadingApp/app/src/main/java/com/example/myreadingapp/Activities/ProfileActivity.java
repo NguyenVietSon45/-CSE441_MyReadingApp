@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -48,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button btnLogout, btnSetting,btnManga,btnChapter,btnSearch;
     CircleImageView imgProfile;
     ImageView btnBack;
+    TextView tv_username;
 
 
     @Override
@@ -161,6 +163,11 @@ public class ProfileActivity extends AppCompatActivity {
         // Lấy avt_url người dùng từ SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String id = sharedPreferences.getString("id", ""); // Lấy id người dùng
+        String username = sharedPreferences.getString("username", "");
+
+        // Hiển thị tên người dùng trong TextView
+        tv_username = findViewById(R.id.tv_username); // Ánh xạ TextView
+        tv_username.setText(username); // Gán tên người dùng vào TextView
 
         database = FirebaseDatabase.getInstance();
         databaseRef = database.getReference("users");

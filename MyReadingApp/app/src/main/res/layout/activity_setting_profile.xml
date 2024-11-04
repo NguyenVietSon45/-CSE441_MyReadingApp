@@ -121,6 +121,7 @@
 
 
             <EditText
+                android:id="@+id/edit_name"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="Đổi tên tài khoản"
@@ -129,6 +130,7 @@
                 android:textColor="@color/black"/>
 
             <EditText
+                android:id="@+id/edit_email"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="Đổi mail liên kết"
@@ -137,6 +139,7 @@
                 android:textColor="@color/black"/>
 
             <EditText
+                android:id="@+id/edit_password"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="Đổi mật khẩu"
@@ -145,6 +148,7 @@
                 android:textColor="@color/black"/>
 
             <Button
+                android:id="@+id/btn_update_edit"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="50dp"

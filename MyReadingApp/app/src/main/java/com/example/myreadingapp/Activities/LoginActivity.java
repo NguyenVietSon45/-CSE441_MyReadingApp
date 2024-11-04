@@ -133,12 +133,16 @@ public class LoginActivity extends AppCompatActivity {
                     String passwordFromDB = null;
                     String avatarUrl = null;
                     String id = null;
+                    String username = null;
+                    String email = null;
 
                     //lấy data từ firebase
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         passwordFromDB = userSnapshot.child("password").getValue(String.class); //lay password tu firebase
                         avatarUrl = userSnapshot.child("avt_url").getValue(String.class); //lay avt tu firebase
                         id = userSnapshot.child("id").getValue(String.class);  //lay id tu firebase
+                        username = userSnapshot.child("username").getValue(String.class);
+                        email = userSnapshot.child("email").getValue(String.class);
                     }
                     //snapshot.getKey(): trả về khóa (ID) của nút người dùng trong cơ sở dữ liệu Firebase.
                     //Objects.requireNonNull() đảm bảo rằng snapshot.getKey() không trả về null trước khi sử dụng nó.
@@ -161,6 +165,8 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("id", id); // Lưu ID vào SharedPreferences
                         editor.putString("avt_url", avatarUrl); // Lưu avt vào SharedPreferences
                         editor.putBoolean("isLoggedIn", true); // Lưu trạng thái đăng nhập
+                        editor.putString("username", username);
+                        editor.putString("email", email);
                         editor.apply(); // Lưu thay đổi
 
                         // Mở MainActivity và điều hướng đến HomeFragment
