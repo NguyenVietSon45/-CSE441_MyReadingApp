@@ -118,6 +118,35 @@ public class MangaInfoActivity extends AppCompatActivity {
     }
 
     private void removeMangaFromFavorites(String currentMangaID) {
+//        DatabaseReference favoritesRef = database.getReference("favorites");
+//        // Tìm kiếm và xóa yêu thích dựa vào user_id và manga_id
+//        favoritesRef.orderByChild("user_id").equalTo(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                boolean found = false; // Flag to check if a favorite was found
+//                for (DataSnapshot favoriteSnapshot : snapshot.getChildren()) {
+//                    Favorite favorite = favoriteSnapshot.getValue(Favorite.class);
+//                    if (favorite != null && favorite.getManga_id().equals(currentMangaID)) {
+//                        favoritesRef.child(favoriteSnapshot.getKey()).removeValue()
+//                                .addOnSuccessListener(aVoid -> {
+//                                    Toast.makeText(MangaInfoActivity.this, "Đã xóa khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
+//                                })
+//                                .addOnFailureListener(e -> {
+//                                    Toast.makeText(MangaInfoActivity.this, "Không thể xóa khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
+//                                });
+//                        found = true; // Set the flag if a favorite is found
+//                    }
+//                }
+//                if (!found) {
+//                    Toast.makeText(MangaInfoActivity.this, "Manga not found in favorites", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(MangaInfoActivity.this, "Failed to remove favorite", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
 
