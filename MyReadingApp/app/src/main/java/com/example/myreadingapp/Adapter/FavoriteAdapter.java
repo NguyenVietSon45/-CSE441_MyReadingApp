@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.myreadingapp.Models.Chapter;
 import com.example.myreadingapp.Models.Favorite;
 import com.example.myreadingapp.Activities.MangaReaderActivity;
+import com.example.myreadingapp.Models.Manga;
 import com.example.myreadingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,23 +56,41 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MangaV
             return;
         }
 
-        Glide.with(mContext)
-                .load(favorite.getImageUrl())
-                .placeholder(R.drawable.placeholder_img) // placeholder image
-                .error(R.drawable.error_img) // error image
-                .into(holder.imgManga);
-        holder.tvName.setText(favorite.getTitle());
+        DatabaseReference mangaRef = FirebaseDatabase.getInstance("https://myreadingapp-39e7b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("manga");
 
-        // Set click listener for the read button
-        holder.btnRead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, MangaReaderActivity.class);
-                // Pass the manga ID or other necessary data
-                intent.putExtra("manga_id", favorite.getManga_id());
-                mContext.startActivity(intent);
-            }
-        });
+        mangaRef.child(favorite.getManga_id()).addListenerForSingleValueEvent(new ValueEventListener() {
+          @Override
+          public void onDataChange(@NonNull DataSnapshot mangaSnapshot) {
+              Manga manga = mangaSnapshot.getValue(Manga.class);
+              if (manga != null) {
+                  Glide.with(mContext)
+                          .load(manga.getImageUrl())
+                          .placeholder(R.drawable.placeholder_img) // placeholder image
+                          .error(R.drawable.error_img) // error image
+                          .into(holder.imgManga);
+                  holder.tvName.setText(manga.getTitle());
+              } else {
+                  holder.tvName.setText("Title not found");
+                  holder.imgManga.setImageResource(R.drawable.error_img);
+              }
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError error) {
+              holder.tvName.setText("Failed to load title");
+              holder.imgManga.setImageResource(R.drawable.error_img);
+          }
+      });
+                // Set click listener for the read button
+                holder.btnRead.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, MangaReaderActivity.class);
+                        // Pass the manga ID or other necessary data
+                        intent.putExtra("manga_id", favorite.getManga_id());
+                        mContext.startActivity(intent);
+                    }
+                });
 
         // Set click listener for the remove button
         holder.btnRemoveFavorite.setOnClickListener(new View.OnClickListener() {

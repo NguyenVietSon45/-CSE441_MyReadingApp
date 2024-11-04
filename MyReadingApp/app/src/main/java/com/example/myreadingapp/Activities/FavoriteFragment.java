@@ -97,58 +97,40 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void handleFavoriteMangaChange(DataSnapshot favoriteSnapshot) {
+        String favoriteId = favoriteSnapshot.child("id").getValue(String.class);
         String mangaId = favoriteSnapshot.child("manga_id").getValue(String.class);
         Long createdAt = favoriteSnapshot.child("created_at").getValue(Long.class);
         String userId = favoriteSnapshot.child("user_id").getValue(String.class);
 
         if (mangaId != null && userId != null) {
-            // Fetch manga details
-            DatabaseReference mangaRef = database.child("manga").child(mangaId);
-            mangaRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot mangaSnapshot) {
-                    Manga manga = mangaSnapshot.getValue(Manga.class);
-                    if (manga != null && manga.getTitle() != null) {
-                        // Check if the manga already exists in the list and update or add it
-                        boolean exists = false;
-                        for (int i = 0; i < list.size(); i++) {
-                            if (list.get(i).getManga_id().equals(mangaId)) {
-                                list.set(i, new Favorite(
-                                        mangaId,
-                                        userId,
-                                        manga.getTitle(),
-                                        manga.getImageUrl(),
-                                        createdAt
-                                ));
-                                favoriteAdapter.notifyItemChanged(i);
-                                exists = true;
-                                break;
-                            }
-                        }
-                        if (!exists) {
-                            list.add(new Favorite(
-                                    mangaId,
-                                    userId,
-                                    manga.getTitle(),
-                                    manga.getImageUrl(),
-                                    createdAt
-                            ));
-                            favoriteAdapter.notifyItemInserted(list.size() - 1);
-                        }
-                    } else {
-                        System.err.println("Invalid manga data found in Firebase for manga ID: " + mangaId);
-                    }
+            boolean exists = false;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getManga_id().equals(mangaId)) {
+                    list.set(i, new Favorite(
+                            favoriteId,
+                            mangaId,
+                            userId,
+                            createdAt
+                    ));
+                    favoriteAdapter.notifyItemChanged(i);
+                    exists = true;
+                    break;
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    System.err.println("Error retrieving manga data from Firebase: " + error.getMessage());
-                }
-            });
+            }
+            if (!exists) {
+                list.add(new Favorite(
+                        favoriteId,
+                        mangaId,
+                        userId,
+                        createdAt
+                ));
+                favoriteAdapter.notifyItemInserted(list.size() - 1);
+            }
         } else {
             System.err.println("Invalid favorite data found in Firebase");
         }
     }
+
 }
 
 
