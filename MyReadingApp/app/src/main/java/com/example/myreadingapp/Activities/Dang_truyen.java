@@ -1,10 +1,8 @@
-package com.example.myreadingappli;
+package com.example.myreadingapp.Activities;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.LoginFilter;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,12 +15,13 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myreadingappli.Adapters.AuthorAdapter;
-import com.example.myreadingappli.Adapters.GenreAdapter;
-import com.example.myreadingappli.DB.MangaGenreDB;
-import com.example.myreadingappli.Info.Author;
-import com.example.myreadingappli.Info.Genre;
-import com.example.myreadingappli.Info.Manga;
+import com.example.myreadingapp.Adapter.AuthorAdapter;
+import com.example.myreadingapp.Adapter.GenreAdapter;
+import com.example.myreadingapp.Models.MangaGenreDB;
+import com.example.myreadingapp.Models.Author;
+import com.example.myreadingapp.Models.Genre;
+import com.example.myreadingapp.Models.Manga;
+import com.example.myreadingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

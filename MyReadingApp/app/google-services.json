@@ -29,7 +29,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:317036739410:android:5f1c5f548d901f9315988b",
         "android_client_info": {
-          "package_name": "com.example.myreadingappli"
+          "package_name": "com.example.myreadingapp"
         }
       },
       "oauth_client": [],
@@ -48,7 +48,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:317036739410:android:53eb95ae3ef050ea15988b",
         "android_client_info": {
-          "package_name": "com.example.myreadingapplication"
+          "package_name": "com.example.myreadingapp"
         }
       },
       "oauth_client": [],

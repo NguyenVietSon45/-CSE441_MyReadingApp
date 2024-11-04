@@ -1,4 +1,4 @@
-package com.example.myreadingappli.Adapters;
+package com.example.myreadingapp.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
-import com.example.myreadingappli.Info.Author;
-import com.example.myreadingappli.R;
+import com.example.myreadingapp.Models.Author;
+import com.example.myreadingapp.R;
 
 import java.util.List;
 

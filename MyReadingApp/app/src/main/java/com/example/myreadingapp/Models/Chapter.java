@@ -1,6 +1,4 @@
-package com.example.myreadingappli.Info;
-
-import java.util.Timer;
+package com.example.myreadingapp.Models;
 
 public class Chapter {
     private String title;

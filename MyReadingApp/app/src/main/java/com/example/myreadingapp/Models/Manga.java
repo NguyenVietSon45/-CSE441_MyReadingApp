@@ -1,4 +1,4 @@
-package com.example.myreadingappli.Info;
+package com.example.myreadingapp.Models;
 
 public class Manga {
     private String title;

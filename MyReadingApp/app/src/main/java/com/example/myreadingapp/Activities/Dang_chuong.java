@@ -1,14 +1,12 @@
-package com.example.myreadingappli;
+package com.example.myreadingapp.Activities;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,11 +17,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myreadingappli.Adapters.AuthorAdapter;
-import com.example.myreadingappli.Adapters.MangaAdapter;
-import com.example.myreadingappli.Info.Author;
-import com.example.myreadingappli.Info.Chapter;
-import com.example.myreadingappli.Info.Manga;
+import com.example.myreadingapp.Adapter.MangaAdapter;
+import com.example.myreadingapp.Models.Chapter;
+import com.example.myreadingapp.Models.Manga;
+import com.example.myreadingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

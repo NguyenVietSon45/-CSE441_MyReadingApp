@@ -1,4 +1,4 @@
-package com.example.myreadingappli.Adapters;
+package com.example.myreadingapp.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myreadingappli.Info.Manga;
-import com.example.myreadingappli.R;
+import com.example.myreadingapp.Models.Manga;
+import com.example.myreadingapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

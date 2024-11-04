@@ -1,4 +1,4 @@
-package com.example.myreadingappli.DB;
+package com.example.myreadingapp.Models;
 
 public class MangaGenreDB {
     private String id;          // ID của MangaGenre

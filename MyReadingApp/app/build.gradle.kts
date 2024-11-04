@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myreadingappli"
+    namespace = "com.example.myreadingapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.myreadingappli"
+        applicationId = "com.example.myreadingapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.example.myreadingappli.Adapters;
+package com.example.myreadingapp.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 
-import com.example.myreadingappli.Info.Genre;
-import com.example.myreadingappli.R;
+import com.example.myreadingapp.Models.Genre;
+import com.example.myreadingapp.R;
 
 import org.jetbrains.annotations.Nullable;
 

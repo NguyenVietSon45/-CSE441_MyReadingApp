@@ -1,4 +1,4 @@
-package com.example.myreadingappli;
+package com.example.myreadingapp;
 
 import android.content.Context;
 

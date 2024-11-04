@@ -1,4 +1,4 @@
-package com.example.myreadingappli;
+package com.example.myreadingapp.Activities;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -8,8 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myreadingappli.Adapters.SortedMangaAdapter;
-import com.example.myreadingappli.Info.Manga;
+import com.example.myreadingapp.Adapter.SortedMangaAdapter;
+import com.example.myreadingapp.Models.Manga;
+import com.example.myreadingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

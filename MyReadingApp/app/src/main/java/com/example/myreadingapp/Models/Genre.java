@@ -1,26 +1,30 @@
-package com.example.myreadingappli.Info;
+package com.example.myreadingapp.Models;
 
-public class Author {
-    private String id;   // Đổi từ Long sang String
+public class Genre {
+    private String id;
     private String name;
 
     // Constructor không tham số
-    public Author() {
+    public Genre() {
     }
 
     // Constructor có tham số
-    public Author(String id, String name) {
-        this.id = id;  // Sử dụng String
+
+    public Genre(String id, String name) {
+        this.id = id;
         this.name = name;
     }
 
+
     // Getter và Setter
+
+
     public String getId() {
-        return id; // Trả về id kiểu String
+        return id;
     }
 
     public void setId(String id) {
-        this.id = id; // Sử dụng String
+        this.id = id;
     }
 
     public String getName() {
@@ -33,6 +37,6 @@ public class Author {
 
     @Override
     public String toString() {
-        return name; // Hiển thị tên tác giả trong spinner
+        return name; // Hiển thị tên genre trong spinner
     }
 }
