@@ -52,7 +52,8 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
         // Set OnClickListener on the chapter TextView
         holder.tv_chapter.setOnClickListener(v -> {
             Intent intent = new Intent(context, MangaReaderActivity.class);
-            intent.putExtra("CHAPTER_ID", chapter.getId()); // Pass the chapter ID
+            intent.putExtra("manga_id", chapter.getManga_id());
+            intent.putExtra("chapter_id", chapter.getId()); // Pass the chapter ID
             context.startActivity(intent);
             Log.d("ChapterAdapter: ","chapter_id: " + chapter.getId());
         });
