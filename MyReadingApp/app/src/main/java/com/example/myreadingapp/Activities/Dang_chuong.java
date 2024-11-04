@@ -56,7 +56,7 @@ public class Dang_chuong extends AppCompatActivity {
 
         ImageView imageViewBack = findViewById(R.id.back_btn);
         imageViewBack.setOnClickListener(v -> {
-            Intent intent = new Intent(Dang_chuong.this, tim_kiem_genre.class);
+            Intent intent = new Intent(Dang_chuong.this, ProfileActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         });

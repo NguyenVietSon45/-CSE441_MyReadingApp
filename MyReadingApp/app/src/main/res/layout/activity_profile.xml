@@ -133,6 +133,28 @@
                 android:backgroundTint="#D9D9D9"
                 android:textColor="@color/black"
                 android:layout_marginTop="20dp" />
+            <Button
+                android:id="@+id/btn_upload_chapter"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="60dp"
+                android:drawableLeft="@drawable/upload"
+                android:text="Đăng chương"
+                android:textSize="20dp"
+                android:backgroundTint="#D9D9D9"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp" />
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="60dp"
+                android:drawableLeft="@drawable/upload"
+                android:text="Tìm kiếm nâng cao"
+                android:textSize="20dp"
+                android:backgroundTint="#D9D9D9"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp" />
 
             <Button
                 android:id="@+id/btn_logout"

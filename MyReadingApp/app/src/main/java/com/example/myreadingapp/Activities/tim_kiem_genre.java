@@ -52,7 +52,7 @@ public class tim_kiem_genre extends AppCompatActivity {
         UIcreated();
         ImageView imageViewBack = findViewById(R.id.back_btn);
         imageViewBack.setOnClickListener(v -> {
-            Intent intent = new Intent(tim_kiem_genre.this, Chapter_notify.class);
+            Intent intent = new Intent(tim_kiem_genre.this, ProfileActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         });
@@ -193,9 +193,10 @@ public class tim_kiem_genre extends AppCompatActivity {
                 String authorId = dataSnapshot.child("authorId").getValue(String.class);
                 String description = dataSnapshot.child("description").getValue(String.class);
                 String imageUrl = dataSnapshot.child("imageUrl").getValue(String.class);
-                long createdAt = dataSnapshot.child("created_at").getValue(Long.class);
+                Long createdAtValue = dataSnapshot.child("created_at").getValue(Long.class);
+                long createdAt = createdAtValue != null ? createdAtValue : 0; // Gán giá trị mặc định
 
-                mangaList.add(new Manga(title, authorId, mangaId, description, imageUrl, createdAt));
+                mangaList.add(new Manga(mangaId,title, imageUrl,authorId,description,createdAt));
                 mangaAdapter.notifyDataSetChanged(); // Cập nhật adapter
             }
 
@@ -220,7 +221,7 @@ public class tim_kiem_genre extends AppCompatActivity {
                             String imageUrl = snapshot.child("imageUrl").getValue(String.class);
 
                             // Chỉ thêm title và imageUrl vào danh sách
-                            mangaList.add(new Manga(title, null, null, null, imageUrl, 0)); // Giả sử bạn không cần các thuộc tính khác
+                            mangaList.add(new Manga( null,title, imageUrl,null, null, 0)); // Giả sử bạn không cần các thuộc tính khác
                         }
                         mangaAdapter.notifyDataSetChanged(); // Cập nhật adapter
                     }

@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference databaseRef;
 
-    Button btnLogout, btnSetting;
+    Button btnLogout, btnSetting,btnManga,btnChapter,btnSearch;
     CircleImageView imgProfile;
     ImageView btnBack;
 
@@ -63,6 +63,26 @@ public class ProfileActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        btnManga=findViewById(R.id.btn_upload_manga);
+        btnManga.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, Dang_truyen.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
+
+        btnChapter=findViewById(R.id.btn_upload_chapter);
+        btnChapter.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, Dang_chuong.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
+
+        btnSearch=findViewById(R.id.btn_search);
+        btnSearch.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, tim_kiem_genre.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         });
 
         imgProfile = findViewById(R.id.profile_image);

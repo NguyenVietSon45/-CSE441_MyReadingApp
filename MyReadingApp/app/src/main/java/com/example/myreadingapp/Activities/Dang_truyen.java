@@ -59,7 +59,7 @@ public class Dang_truyen extends AppCompatActivity {
 
         ImageView imageViewBack = findViewById(R.id.back_btn);
         imageViewBack.setOnClickListener(v -> {
-            Intent intent = new Intent(Dang_truyen.this, Dang_chuong.class);
+            Intent intent = new Intent(Dang_truyen.this, ProfileActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         });
