@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -58,25 +59,17 @@ public class HistoryFragment extends Fragment {
 
     private void listenForHistoryUpdates(String userId) {
         DatabaseReference historyRef = database.child("history");
-        historyRef.orderByChild("user_id").equalTo(userId).addChildEventListener(new ChildEventListener() {
+        historyRef.orderByChild("user_id").equalTo(userId).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                handleHistoryChange(snapshot);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                handleHistoryChange(snapshot);
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                // Not needed for this use case
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear(); // Clear the list to avoid duplicates
+                for (DataSnapshot historySnapshot : snapshot.getChildren()) {
+                    History history = historySnapshot.getValue(History.class);
+                    if (history != null) {
+                        list.add(history);
+                    }
+                }
+                historyAdapter.notifyDataSetChanged(); // Notify the adapter of data changes
             }
 
             @Override
@@ -85,24 +78,4 @@ public class HistoryFragment extends Fragment {
             }
         });
     }
-
-    private void handleHistoryChange(DataSnapshot historySnapshot) {
-        History history = historySnapshot.getValue(History.class);
-        if (history != null) {
-            boolean exists = false;
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getChapter_id().equals(history.getChapter_id())) {
-                    list.set(i, history);
-                    historyAdapter.notifyItemChanged(i);
-                    exists = true;
-                    break;
-                }
-            }
-            if (!exists) {
-                list.add(history);
-                historyAdapter.notifyItemInserted(list.size() - 1);
-            }
-        }
-    }
-
 }

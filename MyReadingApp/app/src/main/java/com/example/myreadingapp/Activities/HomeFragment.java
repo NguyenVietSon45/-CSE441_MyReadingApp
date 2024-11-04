@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference myRef;
 
-    private List<Manga> listManga;
+    private List<Manga> listManga, listFavManga, listHisManga;
     private List<Category> listCategory;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -109,14 +109,21 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false);
         rcvCategory.setLayoutManager(linearLayoutManager);
 
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String user_id = sharedPreferences.getString("id", "");
+
+
+
         listManga = new ArrayList<Manga>();
+        listHisManga = new ArrayList<Manga>();
+        getHistoryList(user_id);
         listCategory = new ArrayList<Category>();
 
         fetchMangaData();
 
         listCategory.add(new Category("Trending", listManga));
         listCategory.add(new Category("Favorite", listManga));
-        listCategory.add(new Category("History", listManga));
+        listCategory.add(new Category("History", listHisManga));
         listCategory.add(new Category("Category", listManga));
         categoryAdapter.setData(listCategory);
 
@@ -138,13 +145,13 @@ public class HomeFragment extends Fragment {
         });
 
         // Lấy avt_url người dùng từ SharedPreferences
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        String id = sharedPreferences.getString("id", ""); // Lấy id người dùng
+//        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+//        String id = sharedPreferences.getString("id", ""); // Lấy id người dùng
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         myRef = firebaseDatabase.getReference("users");
         // Lấy dữ liệu từ Firebase Realtime Database
-        myRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child(user_id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot == null) return;
@@ -198,4 +205,76 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+    public void getHistoryList(String userId) {
+        DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("history");
+        DatabaseReference mangaRef = FirebaseDatabase.getInstance().getReference("mangas"); // Reference to your manga data
+
+        historyRef.orderByChild("user_id").equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Manga> tempList = new ArrayList<>();
+                int totalItems = (int) dataSnapshot.getChildrenCount(); // Total number of manga entries to process
+
+                if (totalItems == 0) {
+                    // If there are no items, update the list and exit early
+                    listHisManga.clear();
+                    listHisManga.addAll(tempList);
+                    categoryAdapter.notifyDataSetChanged();
+                    return;
+                }
+
+                final int[] processedItems = {0}; // Counter to keep track of completed callbacks
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String mangaId = snapshot.child("manga_id").getValue(String.class);
+
+                    if (mangaId != null) {
+                        mangaRef.child(mangaId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot mangaSnapshot) {
+                                String title = mangaSnapshot.child("title").getValue(String.class);
+                                String imageUrl = mangaSnapshot.child("imageUrl").getValue(String.class);
+                                String authorId = mangaSnapshot.child("author_id").getValue(String.class);
+                                String description = mangaSnapshot.child("description").getValue(String.class);
+                                Long createdAt = mangaSnapshot.child("created_at").getValue(Long.class);
+                                long createdAtValue = (createdAt != null) ? createdAt : 0L;
+
+                                Manga manga = new Manga(mangaId, title, imageUrl, authorId, description, createdAtValue);
+                                tempList.add(manga);
+
+                                processedItems[0]++; // Increment the counter
+                                if (processedItems[0] == totalItems) {
+                                    // All items have been processed, update the list
+                                    listHisManga.clear();
+                                    listHisManga.addAll(tempList);
+                                    categoryAdapter.notifyDataSetChanged(); // Notify the adapter here
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                System.out.println("Failed to read manga data: " + databaseError.getMessage());
+                                processedItems[0]++; // Ensure the counter progresses even if there's an error
+                            }
+                        });
+                    } else {
+                        // Handle cases where mangaId is null
+                        processedItems[0]++;
+                        if (processedItems[0] == totalItems) {
+                            listHisManga.clear();
+                            listHisManga.addAll(tempList);
+                            categoryAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Failed to read history data: " + databaseError.getMessage());
+            }
+        });
+    }
+
 }

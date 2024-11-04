@@ -73,7 +73,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MangaVie
 
     @Override
     public void onBindViewHolder(@NonNull HistoryAdapter.MangaViewHolder holder, int position) {
-        History history = mListHistory.get(position);
+        History history = mListHistory.get(holder.getAdapterPosition());
         if (history == null) {
             return;
         }
@@ -138,10 +138,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MangaVie
             SimpleDateFormat dateOnlyFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String dateOnly = dateOnlyFormat.format(date);
 
-            holder.tvLastDate.setText("Last read: " + dateOnly);
+            holder.tvLastDate.setText(dateOnly);
         } catch (ParseException e) {
             Log.e("DateParseError", "Error parsing date", e);
-            holder.tvLastDate.setText("Last read: " + history.getLast_date());
+            holder.tvLastDate.setText(history.getLast_date());
         }
 
         // Set click listener for the "Continue" button

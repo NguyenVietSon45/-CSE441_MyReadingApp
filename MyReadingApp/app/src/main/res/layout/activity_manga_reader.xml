@@ -42,27 +42,15 @@
             android:paddingEnd="10dp"
             android:src="@drawable/arrow_left" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvChapterTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="8dp">
-
-            <TextView
-                android:id="@+id/tvChapterTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chapter 1"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="20sp" />
-
-            <Spinner
-                android:id="@+id/spinnerChapter"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:textAlignment="center" />
-        </LinearLayout>
+            android:text="Chapter 1"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:fontFamily="casual"
+            android:textSize="25sp" />
 
         <ImageButton
             android:id="@+id/btnNext"
@@ -72,6 +60,12 @@
             android:contentDescription="@string/next_chapter"
             android:paddingStart="10dp"
             android:src="@drawable/arrow_right" />
+
+        <Spinner
+            android:id="@+id/spinnerChapter"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:textAlignment="center" />
 
     </LinearLayout>
 
