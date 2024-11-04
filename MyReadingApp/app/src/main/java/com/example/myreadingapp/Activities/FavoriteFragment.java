@@ -1,4 +1,4 @@
-package com.example.myreadingapp;
+package com.example.myreadingapp.Activities;
 
 import android.os.Bundle;
 
@@ -12,6 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myreadingapp.Adapter.FavoriteAdapter;
+import com.example.myreadingapp.Models.Favorite;
+import com.example.myreadingapp.Models.Manga;
+import com.example.myreadingapp.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

@@ -15,7 +15,7 @@
         android:elevation="10dp">
 
         <ImageView
-            android:id="@+id/mangaThumbnail"
+            android:id="@+id/historyImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -30,7 +30,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/mangaTitle"
+            android:id="@+id/historyTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

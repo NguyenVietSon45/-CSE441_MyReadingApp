@@ -1,4 +1,4 @@
-package com.example.myreadingapp;
+package com.example.myreadingapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.myreadingapp.Models.Favorite;
+import com.example.myreadingapp.Activities.MangaReaderActivity;
+import com.example.myreadingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -124,8 +127,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MangaV
         public MangaViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imgManga = itemView.findViewById(R.id.mangaThumbnail);
-            tvName = itemView.findViewById(R.id.mangaTitle);
+            imgManga = itemView.findViewById(R.id.favoriteImage);
+            tvName = itemView.findViewById(R.id.favoriteTitle);
             btnRemoveFavorite = itemView.findViewById(R.id.btnContinue);
             btnRead = itemView.findViewById(R.id.btnRead);
         }

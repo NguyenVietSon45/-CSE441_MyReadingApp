@@ -3,4 +3,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="previous_chapter">Previous chapter</string>
     <string name="next_chapter">Next chapter</string>
+    <string name="back_button">Go back</string>
 </resources>

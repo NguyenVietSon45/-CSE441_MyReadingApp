@@ -1,4 +1,4 @@
-package com.example.myreadingapp;
+package com.example.myreadingapp.Activities;
 
 import android.os.Bundle;
 
@@ -8,18 +8,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.example.myreadingapp.Adapter.HistoryAdapter;
+import com.example.myreadingapp.Models.History;
+import com.example.myreadingapp.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -51,7 +51,7 @@ public class HistoryFragment extends Fragment {
     }
 
     private void listenForHistoryUpdates(String userId) {
-        DatabaseReference historyRef = database.child("readingapp_db").child("history");
+        DatabaseReference historyRef = database.child("history");
         historyRef.orderByChild("user_id").equalTo(userId).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -65,16 +65,7 @@ public class HistoryFragment extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//                String id = snapshot.child("id").getValue(String.class);
-//                if (id != null) {
-//                    for (int i = 0; i < list.size(); i++) {
-//                        if (list.get(i).getId().equals(id)) {
-//                            list.remove(i);
-//                            historyAdapter.notifyItemRemoved(i);
-//                            break;
-//                        }
-//                    }
-//                }
+
             }
 
             @Override

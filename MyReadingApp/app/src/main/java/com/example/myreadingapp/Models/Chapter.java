@@ -1,7 +1,6 @@
-package com.example.myreadingapp;
+package com.example.myreadingapp.Models;
 
 public class Chapter {
-    private String title;
     private String id;
     private String manga_id;
     private int order;
@@ -11,21 +10,12 @@ public class Chapter {
     public Chapter() {
     }
 
-    public Chapter(String title, String id, String manga_id, int order, String pdf_url, long created_at) {
-        this.title = title;
+    public Chapter(String id, String manga_id, int order, String pdf_url, long created_at) {
         this.id = id;
         this.manga_id = manga_id;
         this.order = order;
         this.pdf_url = pdf_url;
         this.created_at = created_at;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getId() {

@@ -1,4 +1,4 @@
-package com.example.myreadingapp;
+package com.example.myreadingapp.Models;
 
 public class Favorite {
     private String manga_id;

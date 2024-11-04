@@ -17,10 +17,10 @@
         android:theme="@style/Theme.MyReadingApp"
         tools:targetApi="31">
         <activity
-            android:name=".MangaReaderActivity"
+            android:name=".Activities.MangaReaderActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MangaLibraryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
