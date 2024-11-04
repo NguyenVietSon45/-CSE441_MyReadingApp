@@ -82,7 +82,6 @@ public class tim_kiem_genre extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Genre selectedGenre = (Genre) parent.getItemAtPosition(position);
                 if (selectedGenre != null) {
-//                    searchMangaByGenre(selectedGenre.getId()); // Tìm kiếm tự động khi chọn thể loại
                 }
             }
 

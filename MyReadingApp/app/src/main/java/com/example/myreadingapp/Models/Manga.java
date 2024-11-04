@@ -67,14 +67,5 @@ public class Manga {
 
     public Manga() {
     }
-    @Override
-    public String toString() {
-        return "Manga{" +
-                "title='" + title + '\'' +
-                ", authorId='" + authorId + '\'' +
-                ", id='" + id + '\'' +
-                ", description='" + description + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                '}';
-    }
+
 }

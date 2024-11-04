@@ -205,7 +205,7 @@ public class Dang_truyen extends AppCompatActivity {
         DatabaseReference comicRef = FirebaseDatabase.getInstance().getReference("manga");
         String mangaId = comicRef.push().getKey();
         long created_at= System.currentTimeMillis();
-        Manga manga = new Manga(title, authorId, mangaId, description, downloadUrl,created_at);
+        Manga manga = new Manga(mangaId,title, downloadUrl,authorId,description,created_at);
         comicRef.child(mangaId).setValue(manga).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 saveMangaGenre(mangaId, genreId);
