@@ -8,19 +8,6 @@ public class Manga {
     private String description;
     private long created_at;
 
-    public Manga(String id, String title, String imageUrl, String authorId, String description, long created_at) {
-        this.id = id;
-        this.title = title;
-        this.imageUrl = imageUrl;
-        this.authorId = authorId;
-        this.description = description;
-        this.created_at = created_at;
-    }
-
-    public Manga() {
-
-    }
-
     public String getId() {
         return id;
     }
@@ -67,5 +54,17 @@ public class Manga {
 
     public void setCreated_at(long created_at) {
         this.created_at = created_at;
+    }
+
+    public Manga(String id, String title, String imageUrl, String authorId, String description, long created_at) {
+        this.id = id;
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.authorId = authorId;
+        this.description = description;
+        this.created_at = created_at;
+    }
+
+    public Manga() {
     }
 }
