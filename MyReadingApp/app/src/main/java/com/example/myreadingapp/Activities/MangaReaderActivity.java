@@ -208,28 +208,6 @@ public class MangaReaderActivity extends AppCompatActivity {
                     }
                 }
 
-                // If more than 5 entries exist, remove the oldest one
-                if (historyEntries.size() >= 5) {
-                    // Sort entries by last_date (oldest first)
-                    historyEntries.sort((h1, h2) -> {
-                        try {
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                            Date date1 = dateFormat.parse(h1.getValue(History.class).getLast_date());
-                            Date date2 = dateFormat.parse(h2.getValue(History.class).getLast_date());
-                            return date1.compareTo(date2);
-                        } catch (ParseException e) {
-                            Log.e("DateSortError", "Error parsing date", e);
-                            return 0;
-                        }
-                    });
-
-                    // Remove the oldest entry
-                    DataSnapshot oldestEntry = historyEntries.get(0);
-                    oldestEntry.getRef().removeValue()
-                            .addOnSuccessListener(aVoid -> Log.d("History", "Oldest entry removed"))
-                            .addOnFailureListener(e -> Log.e("History", "Failed to remove oldest entry", e));
-                }
-
                 if (matchingEntry != null) {
                     // Update the existing entry with new chapter_id and last_date
                     Map<String, Object> updates = new HashMap<>();
@@ -240,7 +218,29 @@ public class MangaReaderActivity extends AppCompatActivity {
                             .addOnSuccessListener(aVoid -> Log.d("History", "Existing entry updated successfully"))
                             .addOnFailureListener(e -> Log.e("History", "Error updating the existing entry: " + e.getMessage()));
                 } else {
-                    // Add a new history entry if no matching entry is found
+                    // Only remove the oldest entry if we're adding a new entry and there are already 5 entries
+                    if (historyEntries.size() >= 5) {
+                        // Sort entries by last_date (oldest first)
+                        historyEntries.sort((h1, h2) -> {
+                            try {
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                                Date date1 = dateFormat.parse(h1.getValue(History.class).getLast_date());
+                                Date date2 = dateFormat.parse(h2.getValue(History.class).getLast_date());
+                                return date1.compareTo(date2);
+                            } catch (ParseException e) {
+                                Log.e("DateSortError", "Error parsing date", e);
+                                return 0;
+                            }
+                        });
+
+                        // Remove the oldest entry
+                        DataSnapshot oldestEntry = historyEntries.get(0);
+                        oldestEntry.getRef().removeValue()
+                                .addOnSuccessListener(aVoid -> Log.d("History", "Oldest entry removed"))
+                                .addOnFailureListener(e -> Log.e("History", "Failed to remove oldest entry", e));
+                    }
+
+                    // Add a new history entry
                     addNewHistoryEntry(chapterId, mangaId);
                 }
             }
@@ -251,6 +251,7 @@ public class MangaReaderActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void addNewHistoryEntry(String chapterId, String mangaId) {
         String historyId = historyRef.push().getKey();
