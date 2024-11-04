@@ -160,8 +160,7 @@ public class MangaInfoActivity extends AppCompatActivity {
         rcvChapter.addItemDecoration(dividerItemDecoration);
 
         mListChapter = new ArrayList<>();
-        mchapterAdapter = new ChapterAdapter(mListChapter);
-
+        mchapterAdapter = new ChapterAdapter(this, mListChapter);
         rcvChapter.setAdapter(mchapterAdapter);
     }
 

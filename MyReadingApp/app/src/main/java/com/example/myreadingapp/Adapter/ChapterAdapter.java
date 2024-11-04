@@ -1,10 +1,14 @@
 package com.example.myreadingapp.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.myreadingapp.Activities.MangaReaderActivity;
 import com.example.myreadingapp.Models.Chapter;
 import com.example.myreadingapp.R;
 
@@ -21,8 +25,11 @@ import java.util.Locale;
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder>{
 
     private List<Chapter> mListChapter;
+    private Context context;
 
-    public ChapterAdapter(List<Chapter> mListChapter) {
+
+    public ChapterAdapter(Context context, List<Chapter> mListChapter) {
+        this.context = context; // Initialize context
         this.mListChapter = mListChapter;
     }
 
@@ -41,6 +48,14 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
         }
         holder.tv_chapter.setText("Chapter " + chapter.getOrder());
         holder.tv_date.setText(convertLongToDate(chapter.getCreated_at()));
+
+        // Set OnClickListener on the chapter TextView
+        holder.tv_chapter.setOnClickListener(v -> {
+            Intent intent = new Intent(context, MangaReaderActivity.class);
+            intent.putExtra("CHAPTER_ID", chapter.getId()); // Pass the chapter ID
+            context.startActivity(intent);
+            Log.d("ChapterAdapter: ","chapter_id: " + chapter.getId());
+        });
     }
 
     @Override
